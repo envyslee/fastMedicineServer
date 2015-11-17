@@ -7,17 +7,27 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
+import org.opensaml.xml.encryption.Public;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
+
+import com.nicholas.fastmedicineserver.business.UserInfo.service.IUserService;
+import com.nicholas.fastmedicineserver.entity.DeviceInfo;
 import com.nicholas.fastmedicineserver.entity.ProductCategory;
 import com.nicholas.fastmedicineserver.entity.ProductDetail;
 import com.nicholas.fastmedicineserver.entity.ProductListItem;
+import com.nicholas.fastmedicineserver.integration.BaseConstants;
 import com.nicholas.fastmedicineserver.integration.WsResponse;
 import com.nicholas.fastmedicineserver.repository.CategoryRepository;
+import com.nicholas.fastmedicineserver.repository.DeviceRepository;
 import com.nicholas.fastmedicineserver.repository.ProductDetailRepository;
 import com.nicholas.fastmedicineserver.integration.CommonMethod;;
 
@@ -31,8 +41,19 @@ public class MedicineController
 	@Autowired
 	ProductDetailRepository productDetailRepo;
 	
+	@Autowired
+	DeviceRepository deviceRepo;
 	
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private IUserService userService;
+
 	
+	/**
+	 * 获取分类列表
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/getProductCategoryList",method=RequestMethod.GET)
 	public WsResponse getCategoryList(HttpServletRequest request)
 	{
@@ -41,6 +62,11 @@ public class MedicineController
 	}
 	
 	
+	/**
+	 * 根据分类获取产品列表
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/postProductList",method=RequestMethod.POST)
 	public WsResponse getProductList(HttpServletRequest request,@RequestParam("categoryId") Long categoryId)
 	{
@@ -67,22 +93,91 @@ public class MedicineController
 	}
 	
 	
+	/**
+	 *获取产品详情
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/postProductDetail",method=RequestMethod.POST)
-	public String  getProductDetail(HttpServletRequest request,@RequestParam("productId") Long productId)
+	public WsResponse  getProductDetail(HttpServletRequest request,@RequestParam("productId") Long productId)
 	{
 		ProductDetail detail=productDetailRepo.findById(productId);
-		return CommonMethod.Obj2Json(WsResponse.successResponse(detail));
+		return null;
+		//return CommonMethod.Obj2Json(WsResponse.successResponse(detail));
 	}
 	
 	
-	
+	/**
+	 * 关键词搜索
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/postSearch",method=RequestMethod.POST)
-	public String  postSearch(HttpServletRequest request,@RequestParam("keyword") String keyword)
+	public WsResponse  postSearch(HttpServletRequest request,@RequestParam("keyword") String keyword)
 	{
 		
 		
 		return null;
 	}
+	
+	
+	/**
+	 * 登录
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/postLogin",method=RequestMethod.POST)
+	public WsResponse postLogin(HttpServletRequest request,
+			@RequestParam("phoneNum") String phoneNum,
+			@RequestParam("password") String password){
+		
+		return null;
+	}
+	
+	/**
+	 * 注册
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/postRegister",method=RequestMethod.POST)
+	public WsResponse postRegister(HttpServletRequest request,
+			@RequestParam("phoneNum") String phoneNum,
+			@RequestParam("password") String password,
+			@RequestParam("deviceModel") String deviceModel,
+			@RequestParam("appVersion") String appVersion){
+		if (!CommonMethod.isMobileNum(phoneNum))
+		{
+			return WsResponse.response("002", BaseConstants.phoneError);
+		}
+		if (StringUtils.isEmpty(password)||StringUtils.isEmpty(deviceModel)||StringUtils.isEmpty(appVersion))
+		{
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		
+		if(userService.isUserExist(phoneNum)){
+			return WsResponse.response("003", BaseConstants.phoneRegisterError);
+		}
+		try
+		{
+			int id=userService.registerUser(phoneNum, password).intValue();
+			if (id>=0)
+			{
+				DeviceInfo deviceInfo=new DeviceInfo();
+				deviceInfo.setAppVersion(appVersion);
+				deviceInfo.setDeviceModel(deviceModel);
+				deviceInfo.setUserId(id);
+				deviceRepo.save(deviceInfo);
+			}
+			return WsResponse.successResponse();
+		} catch (Exception e)
+		{
+			return WsResponse.response("010", BaseConstants.exception);
+		}
+		
+		
+	}
+	
+	
 	
 	
 }

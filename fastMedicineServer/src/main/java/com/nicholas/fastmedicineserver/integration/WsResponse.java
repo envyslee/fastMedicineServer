@@ -40,7 +40,12 @@ public class WsResponse<T>
 	private String resMsg;
 	private T content;
 
-	
+	public WsResponse(String rescode, String resmsg)
+	{
+		super();
+		this.setResCode(rescode);
+		this.setResMsg(resmsg);
+	}
 
 	public WsResponse(String rescode, String resmsg, T content)
 	{
@@ -50,7 +55,10 @@ public class WsResponse<T>
 		this.setContent(content);
 	}
 	
-	
+	public static <T> WsResponse<T> response(String status, String msg)
+	{
+		return new WsResponse<T>(status, msg);
+	}
 
 	public static <T> WsResponse<T> response(String status, String msg, T data)
 	{
@@ -59,7 +67,11 @@ public class WsResponse<T>
 	
 	
 	public static <T> WsResponse<T> successResponse(T data) {
-		return new WsResponse<T>("0","sussess",data);
+		return new WsResponse<T>("0","success",data);
+	}
+	
+	public static <T> WsResponse<T> successResponse() {
+		return new WsResponse<T>("0","success");
 	}
 	
 
