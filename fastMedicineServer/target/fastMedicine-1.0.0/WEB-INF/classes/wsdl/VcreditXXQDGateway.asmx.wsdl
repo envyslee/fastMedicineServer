@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="XXQDInsertVBS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="json" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="XXQDInsertVBSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XXQDInsertVBSResult" type="tns:ResponseData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResponseData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Content" />
+          <s:element minOccurs="0" maxOccurs="1" name="Exception" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="IsSureWithdrawCash">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="json" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsSureWithdrawCashResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsSureWithdrawCashResult" type="tns:ResponseData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsBlack">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="json" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsBlackResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IsBlackResult" type="tns:ResponseData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeBusinessToByStages">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="json" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeBusinessToByStagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ChangeBusinessToByStagesResult" type="tns:ResponseData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DoBusinessClearLoan">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="json" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DoBusinessClearLoanResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DoBusinessClearLoanResult" type="tns:ResponseData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBusinessRepayInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="json" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBusinessRepayInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBusinessRepayInfoResult" type="tns:ResponseData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeLoanPeriodSimBill">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="json" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeLoanPeriodSimBillResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ChangeLoanPeriodSimBillResult" type="tns:ResponseData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBusinessBillInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="json" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBusinessBillInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBusinessBillInfoResult" type="tns:ResponseData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBusinessAdvInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="json" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBusinessAdvInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBusinessAdvInfoResult" type="tns:ResponseData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBusinessAdvForSinglePeriod">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="json" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBusinessAdvForSinglePeriodResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBusinessAdvForSinglePeriodResult" type="tns:ResponseData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PostLoanPending">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="json" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PostLoanPendingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PostLoanPendingResult" type="tns:ResponseData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestDown">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="bid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="filetype" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestDownResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Test">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="bid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ResponseData" nillable="true" type="tns:ResponseData" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="XXQDInsertVBSSoapIn">
+    <wsdl:part name="parameters" element="tns:XXQDInsertVBS" />
+  </wsdl:message>
+  <wsdl:message name="XXQDInsertVBSSoapOut">
+    <wsdl:part name="parameters" element="tns:XXQDInsertVBSResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsSureWithdrawCashSoapIn">
+    <wsdl:part name="parameters" element="tns:IsSureWithdrawCash" />
+  </wsdl:message>
+  <wsdl:message name="IsSureWithdrawCashSoapOut">
+    <wsdl:part name="parameters" element="tns:IsSureWithdrawCashResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsBlackSoapIn">
+    <wsdl:part name="parameters" element="tns:IsBlack" />
+  </wsdl:message>
+  <wsdl:message name="IsBlackSoapOut">
+    <wsdl:part name="parameters" element="tns:IsBlackResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeBusinessToByStagesSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeBusinessToByStages" />
+  </wsdl:message>
+  <wsdl:message name="ChangeBusinessToByStagesSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeBusinessToByStagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="DoBusinessClearLoanSoapIn">
+    <wsdl:part name="parameters" element="tns:DoBusinessClearLoan" />
+  </wsdl:message>
+  <wsdl:message name="DoBusinessClearLoanSoapOut">
+    <wsdl:part name="parameters" element="tns:DoBusinessClearLoanResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessRepayInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBusinessRepayInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessRepayInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBusinessRepayInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeLoanPeriodSimBillSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeLoanPeriodSimBill" />
+  </wsdl:message>
+  <wsdl:message name="ChangeLoanPeriodSimBillSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeLoanPeriodSimBillResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessBillInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBusinessBillInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessBillInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBusinessBillInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessAdvInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBusinessAdvInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessAdvInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBusinessAdvInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessAdvForSinglePeriodSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBusinessAdvForSinglePeriod" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessAdvForSinglePeriodSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBusinessAdvForSinglePeriodResponse" />
+  </wsdl:message>
+  <wsdl:message name="PostLoanPendingSoapIn">
+    <wsdl:part name="parameters" element="tns:PostLoanPending" />
+  </wsdl:message>
+  <wsdl:message name="PostLoanPendingSoapOut">
+    <wsdl:part name="parameters" element="tns:PostLoanPendingResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestDownSoapIn">
+    <wsdl:part name="parameters" element="tns:TestDown" />
+  </wsdl:message>
+  <wsdl:message name="TestDownSoapOut">
+    <wsdl:part name="parameters" element="tns:TestDownResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestSoapIn">
+    <wsdl:part name="parameters" element="tns:Test" />
+  </wsdl:message>
+  <wsdl:message name="TestSoapOut">
+    <wsdl:part name="parameters" element="tns:TestResponse" />
+  </wsdl:message>
+  <wsdl:message name="XXQDInsertVBSHttpGetIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="XXQDInsertVBSHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="IsSureWithdrawCashHttpGetIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsSureWithdrawCashHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="IsBlackHttpGetIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsBlackHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="ChangeBusinessToByStagesHttpGetIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeBusinessToByStagesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="DoBusinessClearLoanHttpGetIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DoBusinessClearLoanHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessRepayInfoHttpGetIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessRepayInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="ChangeLoanPeriodSimBillHttpGetIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeLoanPeriodSimBillHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessBillInfoHttpGetIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessBillInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessAdvInfoHttpGetIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessAdvInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessAdvForSinglePeriodHttpGetIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessAdvForSinglePeriodHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="PostLoanPendingHttpGetIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PostLoanPendingHttpGetOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="TestDownHttpGetIn">
+    <wsdl:part name="bid" type="s:string" />
+    <wsdl:part name="filetype" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TestDownHttpGetOut" />
+  <wsdl:message name="TestHttpGetIn">
+    <wsdl:part name="bid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TestHttpGetOut" />
+  <wsdl:message name="XXQDInsertVBSHttpPostIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="XXQDInsertVBSHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="IsSureWithdrawCashHttpPostIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsSureWithdrawCashHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="IsBlackHttpPostIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsBlackHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="ChangeBusinessToByStagesHttpPostIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeBusinessToByStagesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="DoBusinessClearLoanHttpPostIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DoBusinessClearLoanHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessRepayInfoHttpPostIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessRepayInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="ChangeLoanPeriodSimBillHttpPostIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeLoanPeriodSimBillHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessBillInfoHttpPostIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessBillInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessAdvInfoHttpPostIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessAdvInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessAdvForSinglePeriodHttpPostIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessAdvForSinglePeriodHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="PostLoanPendingHttpPostIn">
+    <wsdl:part name="json" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PostLoanPendingHttpPostOut">
+    <wsdl:part name="Body" element="tns:ResponseData" />
+  </wsdl:message>
+  <wsdl:message name="TestDownHttpPostIn">
+    <wsdl:part name="bid" type="s:string" />
+    <wsdl:part name="filetype" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TestDownHttpPostOut" />
+  <wsdl:message name="TestHttpPostIn">
+    <wsdl:part name="bid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TestHttpPostOut" />
+  <wsdl:portType name="VcreditXXQDGatewaySoap">
+    <wsdl:operation name="XXQDInsertVBS">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">将星星钱袋信息插入到VBS中</wsdl:documentation>
+      <wsdl:input message="tns:XXQDInsertVBSSoapIn" />
+      <wsdl:output message="tns:XXQDInsertVBSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsSureWithdrawCash">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">是否可以提现</wsdl:documentation>
+      <wsdl:input message="tns:IsSureWithdrawCashSoapIn" />
+      <wsdl:output message="tns:IsSureWithdrawCashSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsBlack">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">是否是黑名单用户</wsdl:documentation>
+      <wsdl:input message="tns:IsBlackSoapIn" />
+      <wsdl:output message="tns:IsBlackSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeBusinessToByStages">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">未分期订单更新成分期</wsdl:documentation>
+      <wsdl:input message="tns:ChangeBusinessToByStagesSoapIn" />
+      <wsdl:output message="tns:ChangeBusinessToByStagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DoBusinessClearLoan">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">处理提前清贷</wsdl:documentation>
+      <wsdl:input message="tns:DoBusinessClearLoanSoapIn" />
+      <wsdl:output message="tns:DoBusinessClearLoanSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessRepayInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">订单还款情况</wsdl:documentation>
+      <wsdl:input message="tns:GetBusinessRepayInfoSoapIn" />
+      <wsdl:output message="tns:GetBusinessRepayInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeLoanPeriodSimBill">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">模拟分期账单信息</wsdl:documentation>
+      <wsdl:input message="tns:ChangeLoanPeriodSimBillSoapIn" />
+      <wsdl:output message="tns:ChangeLoanPeriodSimBillSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessBillInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询订单账单情况</wsdl:documentation>
+      <wsdl:input message="tns:GetBusinessBillInfoSoapIn" />
+      <wsdl:output message="tns:GetBusinessBillInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessAdvInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询提前清贷时订单情况</wsdl:documentation>
+      <wsdl:input message="tns:GetBusinessAdvInfoSoapIn" />
+      <wsdl:output message="tns:GetBusinessAdvInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessAdvForSinglePeriod">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询一期提前清贷时订单情况</wsdl:documentation>
+      <wsdl:input message="tns:GetBusinessAdvForSinglePeriodSoapIn" />
+      <wsdl:output message="tns:GetBusinessAdvForSinglePeriodSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PostLoanPending">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">未决结果确定后，进行调用</wsdl:documentation>
+      <wsdl:input message="tns:PostLoanPendingSoapIn" />
+      <wsdl:output message="tns:PostLoanPendingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestDown">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">TestDown</wsdl:documentation>
+      <wsdl:input message="tns:TestDownSoapIn" />
+      <wsdl:output message="tns:TestDownSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Test</wsdl:documentation>
+      <wsdl:input message="tns:TestSoapIn" />
+      <wsdl:output message="tns:TestSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="VcreditXXQDGatewayHttpGet">
+    <wsdl:operation name="XXQDInsertVBS">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">将星星钱袋信息插入到VBS中</wsdl:documentation>
+      <wsdl:input message="tns:XXQDInsertVBSHttpGetIn" />
+      <wsdl:output message="tns:XXQDInsertVBSHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsSureWithdrawCash">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">是否可以提现</wsdl:documentation>
+      <wsdl:input message="tns:IsSureWithdrawCashHttpGetIn" />
+      <wsdl:output message="tns:IsSureWithdrawCashHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsBlack">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">是否是黑名单用户</wsdl:documentation>
+      <wsdl:input message="tns:IsBlackHttpGetIn" />
+      <wsdl:output message="tns:IsBlackHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeBusinessToByStages">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">未分期订单更新成分期</wsdl:documentation>
+      <wsdl:input message="tns:ChangeBusinessToByStagesHttpGetIn" />
+      <wsdl:output message="tns:ChangeBusinessToByStagesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DoBusinessClearLoan">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">处理提前清贷</wsdl:documentation>
+      <wsdl:input message="tns:DoBusinessClearLoanHttpGetIn" />
+      <wsdl:output message="tns:DoBusinessClearLoanHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessRepayInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">订单还款情况</wsdl:documentation>
+      <wsdl:input message="tns:GetBusinessRepayInfoHttpGetIn" />
+      <wsdl:output message="tns:GetBusinessRepayInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeLoanPeriodSimBill">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">模拟分期账单信息</wsdl:documentation>
+      <wsdl:input message="tns:ChangeLoanPeriodSimBillHttpGetIn" />
+      <wsdl:output message="tns:ChangeLoanPeriodSimBillHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessBillInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询订单账单情况</wsdl:documentation>
+      <wsdl:input message="tns:GetBusinessBillInfoHttpGetIn" />
+      <wsdl:output message="tns:GetBusinessBillInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessAdvInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询提前清贷时订单情况</wsdl:documentation>
+      <wsdl:input message="tns:GetBusinessAdvInfoHttpGetIn" />
+      <wsdl:output message="tns:GetBusinessAdvInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessAdvForSinglePeriod">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询一期提前清贷时订单情况</wsdl:documentation>
+      <wsdl:input message="tns:GetBusinessAdvForSinglePeriodHttpGetIn" />
+      <wsdl:output message="tns:GetBusinessAdvForSinglePeriodHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PostLoanPending">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">未决结果确定后，进行调用</wsdl:documentation>
+      <wsdl:input message="tns:PostLoanPendingHttpGetIn" />
+      <wsdl:output message="tns:PostLoanPendingHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestDown">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">TestDown</wsdl:documentation>
+      <wsdl:input message="tns:TestDownHttpGetIn" />
+      <wsdl:output message="tns:TestDownHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Test</wsdl:documentation>
+      <wsdl:input message="tns:TestHttpGetIn" />
+      <wsdl:output message="tns:TestHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="VcreditXXQDGatewayHttpPost">
+    <wsdl:operation name="XXQDInsertVBS">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">将星星钱袋信息插入到VBS中</wsdl:documentation>
+      <wsdl:input message="tns:XXQDInsertVBSHttpPostIn" />
+      <wsdl:output message="tns:XXQDInsertVBSHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsSureWithdrawCash">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">是否可以提现</wsdl:documentation>
+      <wsdl:input message="tns:IsSureWithdrawCashHttpPostIn" />
+      <wsdl:output message="tns:IsSureWithdrawCashHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsBlack">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">是否是黑名单用户</wsdl:documentation>
+      <wsdl:input message="tns:IsBlackHttpPostIn" />
+      <wsdl:output message="tns:IsBlackHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeBusinessToByStages">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">未分期订单更新成分期</wsdl:documentation>
+      <wsdl:input message="tns:ChangeBusinessToByStagesHttpPostIn" />
+      <wsdl:output message="tns:ChangeBusinessToByStagesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DoBusinessClearLoan">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">处理提前清贷</wsdl:documentation>
+      <wsdl:input message="tns:DoBusinessClearLoanHttpPostIn" />
+      <wsdl:output message="tns:DoBusinessClearLoanHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessRepayInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">订单还款情况</wsdl:documentation>
+      <wsdl:input message="tns:GetBusinessRepayInfoHttpPostIn" />
+      <wsdl:output message="tns:GetBusinessRepayInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeLoanPeriodSimBill">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">模拟分期账单信息</wsdl:documentation>
+      <wsdl:input message="tns:ChangeLoanPeriodSimBillHttpPostIn" />
+      <wsdl:output message="tns:ChangeLoanPeriodSimBillHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessBillInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询订单账单情况</wsdl:documentation>
+      <wsdl:input message="tns:GetBusinessBillInfoHttpPostIn" />
+      <wsdl:output message="tns:GetBusinessBillInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessAdvInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询提前清贷时订单情况</wsdl:documentation>
+      <wsdl:input message="tns:GetBusinessAdvInfoHttpPostIn" />
+      <wsdl:output message="tns:GetBusinessAdvInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessAdvForSinglePeriod">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询一期提前清贷时订单情况</wsdl:documentation>
+      <wsdl:input message="tns:GetBusinessAdvForSinglePeriodHttpPostIn" />
+      <wsdl:output message="tns:GetBusinessAdvForSinglePeriodHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PostLoanPending">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">未决结果确定后，进行调用</wsdl:documentation>
+      <wsdl:input message="tns:PostLoanPendingHttpPostIn" />
+      <wsdl:output message="tns:PostLoanPendingHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TestDown">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">TestDown</wsdl:documentation>
+      <wsdl:input message="tns:TestDownHttpPostIn" />
+      <wsdl:output message="tns:TestDownHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Test</wsdl:documentation>
+      <wsdl:input message="tns:TestHttpPostIn" />
+      <wsdl:output message="tns:TestHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="VcreditXXQDGatewaySoap" type="tns:VcreditXXQDGatewaySoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="XXQDInsertVBS">
+      <soap:operation soapAction="http://tempuri.org/XXQDInsertVBS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsSureWithdrawCash">
+      <soap:operation soapAction="http://tempuri.org/IsSureWithdrawCash" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsBlack">
+      <soap:operation soapAction="http://tempuri.org/IsBlack" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeBusinessToByStages">
+      <soap:operation soapAction="http://tempuri.org/ChangeBusinessToByStages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoBusinessClearLoan">
+      <soap:operation soapAction="http://tempuri.org/DoBusinessClearLoan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessRepayInfo">
+      <soap:operation soapAction="http://tempuri.org/GetBusinessRepayInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeLoanPeriodSimBill">
+      <soap:operation soapAction="http://tempuri.org/ChangeLoanPeriodSimBill" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessBillInfo">
+      <soap:operation soapAction="http://tempuri.org/GetBusinessBillInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessAdvInfo">
+      <soap:operation soapAction="http://tempuri.org/GetBusinessAdvInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessAdvForSinglePeriod">
+      <soap:operation soapAction="http://tempuri.org/GetBusinessAdvForSinglePeriod" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostLoanPending">
+      <soap:operation soapAction="http://tempuri.org/PostLoanPending" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestDown">
+      <soap:operation soapAction="http://tempuri.org/TestDown" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <soap:operation soapAction="http://tempuri.org/Test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="VcreditXXQDGatewaySoap12" type="tns:VcreditXXQDGatewaySoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="XXQDInsertVBS">
+      <soap12:operation soapAction="http://tempuri.org/XXQDInsertVBS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsSureWithdrawCash">
+      <soap12:operation soapAction="http://tempuri.org/IsSureWithdrawCash" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsBlack">
+      <soap12:operation soapAction="http://tempuri.org/IsBlack" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeBusinessToByStages">
+      <soap12:operation soapAction="http://tempuri.org/ChangeBusinessToByStages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoBusinessClearLoan">
+      <soap12:operation soapAction="http://tempuri.org/DoBusinessClearLoan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessRepayInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetBusinessRepayInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeLoanPeriodSimBill">
+      <soap12:operation soapAction="http://tempuri.org/ChangeLoanPeriodSimBill" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessBillInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetBusinessBillInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessAdvInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetBusinessAdvInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessAdvForSinglePeriod">
+      <soap12:operation soapAction="http://tempuri.org/GetBusinessAdvForSinglePeriod" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostLoanPending">
+      <soap12:operation soapAction="http://tempuri.org/PostLoanPending" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestDown">
+      <soap12:operation soapAction="http://tempuri.org/TestDown" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <soap12:operation soapAction="http://tempuri.org/Test" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="VcreditXXQDGatewayHttpGet" type="tns:VcreditXXQDGatewayHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="XXQDInsertVBS">
+      <http:operation location="/XXQDInsertVBS" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsSureWithdrawCash">
+      <http:operation location="/IsSureWithdrawCash" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsBlack">
+      <http:operation location="/IsBlack" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeBusinessToByStages">
+      <http:operation location="/ChangeBusinessToByStages" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoBusinessClearLoan">
+      <http:operation location="/DoBusinessClearLoan" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessRepayInfo">
+      <http:operation location="/GetBusinessRepayInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeLoanPeriodSimBill">
+      <http:operation location="/ChangeLoanPeriodSimBill" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessBillInfo">
+      <http:operation location="/GetBusinessBillInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessAdvInfo">
+      <http:operation location="/GetBusinessAdvInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessAdvForSinglePeriod">
+      <http:operation location="/GetBusinessAdvForSinglePeriod" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostLoanPending">
+      <http:operation location="/PostLoanPending" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestDown">
+      <http:operation location="/TestDown" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <http:operation location="/Test" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="VcreditXXQDGatewayHttpPost" type="tns:VcreditXXQDGatewayHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="XXQDInsertVBS">
+      <http:operation location="/XXQDInsertVBS" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsSureWithdrawCash">
+      <http:operation location="/IsSureWithdrawCash" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsBlack">
+      <http:operation location="/IsBlack" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeBusinessToByStages">
+      <http:operation location="/ChangeBusinessToByStages" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoBusinessClearLoan">
+      <http:operation location="/DoBusinessClearLoan" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessRepayInfo">
+      <http:operation location="/GetBusinessRepayInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeLoanPeriodSimBill">
+      <http:operation location="/ChangeLoanPeriodSimBill" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessBillInfo">
+      <http:operation location="/GetBusinessBillInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessAdvInfo">
+      <http:operation location="/GetBusinessAdvInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessAdvForSinglePeriod">
+      <http:operation location="/GetBusinessAdvForSinglePeriod" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostLoanPending">
+      <http:operation location="/PostLoanPending" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestDown">
+      <http:operation location="/TestDown" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <http:operation location="/Test" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VcreditXXQDGateway">
+    <wsdl:port name="VcreditXXQDGatewaySoap" binding="tns:VcreditXXQDGatewaySoap">
+      <soap:address location="http://10.1.8.91:8090/XXQDWebService/GateWay/VcreditXXQDGateway.asmx" />
+    </wsdl:port>
+    <wsdl:port name="VcreditXXQDGatewaySoap12" binding="tns:VcreditXXQDGatewaySoap12">
+      <soap12:address location="http://10.1.8.91:8090/XXQDWebService/GateWay/VcreditXXQDGateway.asmx" />
+    </wsdl:port>
+    <wsdl:port name="VcreditXXQDGatewayHttpGet" binding="tns:VcreditXXQDGatewayHttpGet">
+      <http:address location="http://10.1.8.91:8090/XXQDWebService/GateWay/VcreditXXQDGateway.asmx" />
+    </wsdl:port>
+    <wsdl:port name="VcreditXXQDGatewayHttpPost" binding="tns:VcreditXXQDGatewayHttpPost">
+      <http:address location="http://10.1.8.91:8090/XXQDWebService/GateWay/VcreditXXQDGateway.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
