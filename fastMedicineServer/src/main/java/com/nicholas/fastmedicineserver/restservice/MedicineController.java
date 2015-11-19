@@ -99,10 +99,10 @@ public class MedicineController
 	 * @return
 	 */
 	@RequestMapping(value = "/postProductDetail",method=RequestMethod.POST)
-	public WsResponse  getProductDetail(HttpServletRequest request,@RequestParam("productId") Long productId)
+	public WsResponse getProductDetail(HttpServletRequest request,@RequestParam("productId") Long productId)
 	{
 		ProductDetail detail=productDetailRepo.findById(productId);
-		return null;
+		return WsResponse.successResponse(detail);
 		//return CommonMethod.Obj2Json(WsResponse.successResponse(detail));
 	}
 	
