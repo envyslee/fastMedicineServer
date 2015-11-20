@@ -18,12 +18,25 @@ public class DeviceInfo
 	private Long id;// 自增序列号
 
 
-	@Column(name = "deviceModel", length = 50, nullable = false)
+	@Column(name = "deviceModel", length = 100, nullable = false)
 	private String deviceModel;// 设备型号
 	
 	@Column(name = "appVersion", length = 10, nullable = false)
 	private String appVersion;// 版本号
 	
+	@Column(name="osVersion",length=20)
+	private String osVersion;//系统版本号
+	
+	public String getOsVersion()
+	{
+		return osVersion;
+	}
+
+	public void setOsVersion(String osVersion)
+	{
+		this.osVersion = osVersion;
+	}
+
 	@Column(name = "userId",  nullable = false)
 	private Integer userId;// 用户id
 

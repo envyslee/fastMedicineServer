@@ -7,4 +7,6 @@ import com.nicholas.fastmedicineserver.entity.UserInfo;
 public interface UserRepository extends JpaRepository<UserInfo, Long>
 {
 		UserInfo findByPhoneNum(String num);
+		
+		UserInfo findById(Long id);
 }

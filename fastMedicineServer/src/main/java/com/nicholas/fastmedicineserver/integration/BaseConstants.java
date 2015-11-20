@@ -9,4 +9,12 @@ public class BaseConstants
 	public static String phoneError = "手机号码格式不正确";// 002
 
 	public static String phoneRegisterError = "手机号码已注册";// 003
+	
+	public static String phoneLoginError="该手机号尚未注册";//004
+	
+	public static String passwordLoginError="密码不正确";//005
+	
+	public static String idNotExist="用户id不存在";//006
+	
+	public static String searchNoResult="没有搜索到相关内容";//007
 }

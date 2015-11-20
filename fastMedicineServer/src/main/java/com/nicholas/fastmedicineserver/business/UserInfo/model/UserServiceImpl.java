@@ -17,9 +17,20 @@ public class UserServiceImpl implements IUserService
 	
 	
 	@Override
-	public boolean isUserExist(String num)
+	public boolean isUserExistByPhone(String num)
 	{
 		UserInfo userInfo=	userRepo.findByPhoneNum(num);
+		if (userInfo==null)
+		{
+			return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean isUserExistById(Long id)
+	{
+		UserInfo userInfo=userRepo.findById(id);
 		if (userInfo==null)
 		{
 			return false;
@@ -37,6 +48,16 @@ public class UserServiceImpl implements IUserService
 		info.setCreatedTime(new Date());
 		userRepo.save(info);
 		return info.getId();
+	}
+	
+	@Override
+	public String login(String phoneNum,String password)
+	{
+		UserInfo userInfo=	userRepo.findByPhoneNum(phoneNum);
+		String realPassword=userInfo.getPassword();
+		if (password.equals(realPassword))
+			return userInfo.getId().toString();
+		return null;
 	}
 	
 }

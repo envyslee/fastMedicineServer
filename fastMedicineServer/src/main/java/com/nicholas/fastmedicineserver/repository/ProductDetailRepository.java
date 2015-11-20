@@ -15,4 +15,8 @@ public interface ProductDetailRepository extends JpaRepository<ProductDetail, Lo
 	ProductDetail findById(Long id);
 	
 	List<ProductDetail> findByCategoryId(Long id);
+	
+	
+	@Query(nativeQuery = true, value ="SELECT * from t_productdetail WHERE  product_key LIKE ?1")
+	List<ProductDetail> findSearchKey(String key);
 }
