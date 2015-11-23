@@ -13,12 +13,12 @@ import javax.persistence.Table;
 @Table(name = "t_category")
 public class ProductCategory
 {
-	public Long getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(Long id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}
@@ -56,7 +56,7 @@ public class ProductCategory
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	private Long id;// 自增序列号
+	private Integer id;// 自增序列号
 
 
 	@Column(name = "iconUrl", length = 50, nullable = false)

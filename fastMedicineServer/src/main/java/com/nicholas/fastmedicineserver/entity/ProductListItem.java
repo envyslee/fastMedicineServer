@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class ProductListItem
 {
 	
-	private Long id;
+	private Integer id;
 	
 
 	private String iconUrl;// 图片
@@ -26,7 +26,7 @@ public class ProductListItem
 	private String productDesc;// 描述
 	
 	
-	private Long productId;
+	private Integer productId;
 	
 	private String productSpec;// 商品规格
 	
@@ -34,14 +34,25 @@ public class ProductListItem
 	
 	private Integer productSale;// 商品销量
 	
+	private Integer pharmacyId;// 药店id
+	
+	public Integer getPharmacyId()
+	{
+		return pharmacyId;
+	}
+
+	public void setPharmacyId(Integer pharmacyId)
+	{
+		this.pharmacyId = pharmacyId;
+	}
 	
 
-	public Long getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(Long id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}
@@ -76,12 +87,12 @@ public class ProductListItem
 		this.productDesc = productDesc;
 	}
 
-	public Long getProductId()
+	public Integer getProductId()
 	{
 		return productId;
 	}
 
-	public void setProductId(Long productId)
+	public void setProductId(Integer productId)
 	{
 		this.productId = productId;
 	}

@@ -18,7 +18,7 @@ public class Feedback
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	private Long id;// 自增序列号
+	private Integer id;// 自增序列号
 
 	@Column(name = "createdTime")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -42,12 +42,12 @@ public class Feedback
 	@Column(name = "deviceOS", length = 10, nullable = false)
 	private String deviceOS;// 系统
 	
-	public Long getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(Long id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}

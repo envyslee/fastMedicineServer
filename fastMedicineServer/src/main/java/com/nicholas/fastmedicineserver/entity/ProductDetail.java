@@ -19,13 +19,13 @@ public class ProductDetail
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	private Long id;// 自增序列号
+	private Integer id;// 自增序列号
 	
 	@Column(name = "productIntro")
 	private String productIntro;// 说明书
 	
 	@Column(name="categoryId",nullable=false)
-	private Long categoryId;//分类id
+	private Integer categoryId;//分类id
 	
 	@Column(name="productPics",length = 255)
 	private String productPics;//商品连扳图
@@ -78,6 +78,24 @@ public class ProductDetail
 	@Column(name = "productSale",  nullable = false)
 	private Integer productSale;// 商品销量
 	
+	@Column(name = "pharmacyId", nullable = false)
+	private Integer pharmacyId;// 药店id
+	
+	public Integer getPharmacyId()
+	{
+		return pharmacyId;
+	}
+
+	public void setPharmacyId(Integer pharmacyId)
+	{
+		this.pharmacyId = pharmacyId;
+	}
+
+	public Integer getShakeStatus()
+	{
+		return shakeStatus;
+	}
+
 	public String getUsageAmount()
 	{
 		return usageAmount;
@@ -201,12 +219,12 @@ public class ProductDetail
 		this.productSale = productSale;
 	}
 
-	public Long getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(Long id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}
@@ -221,12 +239,12 @@ public class ProductDetail
 		this.productIntro = productIntro;
 	}
 
-	public Long getCategoryId()
+	public Integer getCategoryId()
 	{
 		return categoryId;
 	}
 
-	public void setCategoryId(Long categoryId)
+	public void setCategoryId(Integer categoryId)
 	{
 		this.categoryId = categoryId;
 	}

@@ -1,5 +1,9 @@
 package com.nicholas.fastmedicineserver.business.UserInfo.service;
 
+import java.util.List;
+
+import com.nicholas.fastmedicineserver.entity.Address;
+
 
 public interface IUserService
 {
@@ -29,4 +33,24 @@ public interface IUserService
 	 * @return
 	 */
 	String login(String phoneNum,String password);
+	
+	/**
+	 * 提交地址
+	 * @param userId
+	 * @param city
+	 * @param receiver
+	 * @param phone
+	 * @param mapAdd
+	 * @param detailAdd
+	 * @return
+	 */
+	void submitAddress(Integer userId,String city,String receiver,String phone,String mapAdd,String detailAdd,String mapLongAdd);
+	
+	
+	/**
+	 * 获取地址
+	 * @param userId
+	 * @return
+	 */
+	List<Address> getAddress(Integer userId);
 }

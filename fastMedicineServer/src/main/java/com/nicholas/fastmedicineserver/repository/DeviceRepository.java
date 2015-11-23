@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.nicholas.fastmedicineserver.entity.DeviceInfo;
 
-public interface DeviceRepository extends JpaRepository<DeviceInfo, Long>
+public interface DeviceRepository extends JpaRepository<DeviceInfo, Integer>
 {
 
 }

@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.nicholas.fastmedicineserver.entity.ProductCategory;
 
 
-public interface CategoryRepository extends JpaRepository<ProductCategory, Long>
+public interface CategoryRepository extends JpaRepository<ProductCategory, Integer>
 {
 	//List<ProductCategory> categories=findAll();
 }

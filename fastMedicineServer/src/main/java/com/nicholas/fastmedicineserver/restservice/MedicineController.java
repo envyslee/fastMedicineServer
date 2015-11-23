@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Null;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jboss.logging.annotations.Param;
@@ -18,11 +19,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nicholas.fastmedicineserver.business.Distance.service.IPharmacyService;
+import com.nicholas.fastmedicineserver.business.Order.service.IProductSevice;
 import com.nicholas.fastmedicineserver.business.UserInfo.service.IUserService;
+import com.nicholas.fastmedicineserver.entity.Address;
 import com.nicholas.fastmedicineserver.entity.DeviceInfo;
 import com.nicholas.fastmedicineserver.entity.Feedback;
 import com.nicholas.fastmedicineserver.entity.ProductCategory;
 import com.nicholas.fastmedicineserver.entity.ProductDetail;
+import com.nicholas.fastmedicineserver.entity.ProductDetailItem;
 import com.nicholas.fastmedicineserver.entity.ProductListItem;
 import com.nicholas.fastmedicineserver.integration.BaseConstants;
 import com.nicholas.fastmedicineserver.integration.WsResponse;
@@ -54,6 +59,14 @@ public class MedicineController
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private IUserService userService;
+	
+	@Autowired
+	@Qualifier("pharmacyServiceImpl")
+	private IPharmacyService pharmacyService;
+	
+	@Autowired
+	@Qualifier("productServiceImpl")
+	private IProductSevice productService;
 
 	/**
 	 * 获取分类列表
@@ -76,11 +89,19 @@ public class MedicineController
 	 */
 	@RequestMapping(value = "/postProductList", method = RequestMethod.POST)
 	public WsResponse getProductList(HttpServletRequest request,
-			@RequestParam("categoryId") Long categoryId)
+			@RequestParam("lo") String lo,
+			@RequestParam("la") String la,
+			@RequestParam("categoryId") String categoryId)
 	{
+		Integer pharmacy_id=pharmacyService.getNearestPharmacy(Double.valueOf(la), Double.valueOf(lo));
+		if (pharmacy_id==null||pharmacy_id<=0)
+		{
+			return WsResponse.response("008", BaseConstants.noPharmacy);
+		}
+		
 		List<ProductListItem> list = new ArrayList<ProductListItem>();
-		List<ProductDetail> tmp = productDetailRepo
-				.findByCategoryId(categoryId);
+		List<ProductDetail> tmp = productService.getProductDetails(pharmacy_id.intValue(),Integer.parseInt(categoryId));
+		
 		for (ProductDetail detail : tmp)
 		{
 			ProductListItem item = new ProductListItem();
@@ -96,6 +117,7 @@ public class MedicineController
 			item.setProductSpec(detail.getProductSpec());
 			item.setProductSale(detail.getProductSale());
 			item.setProductPrice(detail.getProductPrice());
+			item.setPharmacyId(detail.getPharmacyId());
 			list.add(item);
 		}
 		return WsResponse.successResponse(list);
@@ -109,9 +131,12 @@ public class MedicineController
 	 */
 	@RequestMapping(value = "/postProductDetail", method = RequestMethod.POST)
 	public WsResponse getProductDetail(HttpServletRequest request,
-			@RequestParam("productId") Long productId)
+			@RequestParam("productId") String productId,
+			@RequestParam("pharmacyId") String pharmacyId)
 	{
-		ProductDetail detail = productDetailRepo.findById(productId);
+		
+		//ProductDetail detail = productDetailRepo.findById(productId);
+		ProductDetailItem detail=productService.getDetail(Integer.valueOf(pharmacyId), Integer.valueOf(productId));
 		return WsResponse.successResponse(detail);
 	}
 
@@ -254,6 +279,54 @@ public class MedicineController
 			feedback.setUserId(idLong);
 			feedRepo.save(feedback);
 			return WsResponse.successResponse();
+		} catch (Exception e)
+		{
+			return WsResponse.response("010", BaseConstants.exception);
+		}
+	}
+	
+	
+	@RequestMapping(value = "/postAddress", method = RequestMethod.POST)
+	public WsResponse postAddress(HttpServletRequest request,
+			@RequestParam("userId") String userId,
+			@RequestParam("city") String city,
+			@RequestParam("receiver") String receiver,
+			@RequestParam("phone") String phone,
+			@RequestParam("mapAdd") String mapAdd,
+			@RequestParam("detailAdd") String detailAdd,
+			@RequestParam("mapLongAdd") String mapLongAdd)
+	{
+		if (!CommonMethod.isMobileNum(phone))
+		{
+			return WsResponse.response("002", BaseConstants.phoneError);
+		}
+		if (StringUtils.isBlank(userId)||StringUtils.isBlank(city)||StringUtils.isBlank(receiver)||StringUtils.isBlank(mapAdd)||StringUtils.isBlank(detailAdd))
+		{
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		try
+		{
+			userService.submitAddress(Integer.valueOf(userId), city, receiver, phone, mapAdd, detailAdd,mapLongAdd);
+			return WsResponse.successResponse();
+		} catch (Exception e)
+		{
+			return WsResponse.response("010", BaseConstants.exception);
+		}
+		
+		
+	}
+	
+	@RequestMapping(value = "/getAddress", method = RequestMethod.POST)
+	public WsResponse getAddress(HttpServletRequest request,@RequestParam("userId") String userId)
+	{
+		if (StringUtils.isBlank(userId))
+		{
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		try
+		{
+			List<Address> list=userService.getAddress(Integer.valueOf(userId));
+			return WsResponse.successResponse(list);
 		} catch (Exception e)
 		{
 			return WsResponse.response("010", BaseConstants.exception);

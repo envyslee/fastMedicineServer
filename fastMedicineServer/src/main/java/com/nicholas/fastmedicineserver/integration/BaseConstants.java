@@ -17,4 +17,6 @@ public class BaseConstants
 	public static String idNotExist="用户id不存在";//006
 	
 	public static String searchNoResult="没有搜索到相关内容";//007
+	
+	public static String noPharmacy="没有找到附近药店";//008
 }
