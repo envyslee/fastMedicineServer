@@ -5,9 +5,12 @@ import java.util.List;
 import com.nicholas.fastmedicineserver.entity.Price;
 import com.nicholas.fastmedicineserver.entity.ProductDetail;
 import com.nicholas.fastmedicineserver.entity.ProductDetailItem;
+import com.nicholas.fastmedicineserver.entity.ProductListItem;
 
 public interface IProductSevice
 {
+	
+	
 	List<Price> getProducts(Integer p, Integer c);
 
 	
@@ -27,4 +30,14 @@ public interface IProductSevice
 	 * @return
 	 */
 	ProductDetailItem  getDetail(Integer ph, Integer pr);
+	
+	
+	/**
+	 * 获取药店所有商品
+	 * @return
+	 */
+	List<ProductListItem> getProcuctBySearch(Integer ph,String key);
+	
+	
+	
 }

@@ -14,9 +14,6 @@ import javax.persistence.Table;
 public class ProductListItem
 {
 	
-	private Integer id;
-	
-
 	private String iconUrl;// 图片
 	
 
@@ -47,15 +44,6 @@ public class ProductListItem
 	}
 	
 
-	public Integer getId()
-	{
-		return id;
-	}
-
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
 
 	public String getIconUrl()
 	{

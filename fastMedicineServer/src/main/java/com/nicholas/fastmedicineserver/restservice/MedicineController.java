@@ -148,9 +148,18 @@ public class MedicineController
 	 */
 	@RequestMapping(value = "/postSearch", method = RequestMethod.POST)
 	public WsResponse postSearch(HttpServletRequest request,
-			@RequestParam("keyword") String keyword)
+			@RequestParam("keyword") String keyword,
+			@RequestParam("lo") String lo,
+			@RequestParam("la") String la)
 	{
-		List<ProductDetail> list=productDetailRepo.findSearchKey("%"+keyword+"%");
+		Integer pharmacy_id=pharmacyService.getNearestPharmacy(Double.valueOf(la), Double.valueOf(lo));
+		if (pharmacy_id==null||pharmacy_id<=0)
+		{
+			return WsResponse.response("008", BaseConstants.noPharmacy);
+		}
+		List<ProductListItem> list=productService.getProcuctBySearch(pharmacy_id, keyword);
+		
+		//List<ProductDetail> list=productDetailRepo.findSearchKey("%"+keyword+"%");
 		if (list!=null&&list.size()>0)
 		{
 			return WsResponse.successResponse(list);

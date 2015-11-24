@@ -15,4 +15,6 @@ public interface PriceRepository extends JpaRepository<Price, Integer>
 	
 	@Query(nativeQuery = true, value ="SELECT * from t_price WHERE  pharmacy_id=?1 and product_id=?2")
 	Price getDetail(Integer ph,Integer pr);
+	
+	List<Price> findByPharmacyId(Integer id); 
 }
