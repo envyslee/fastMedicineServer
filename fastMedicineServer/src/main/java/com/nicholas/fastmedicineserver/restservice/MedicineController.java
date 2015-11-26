@@ -29,12 +29,14 @@ import com.nicholas.fastmedicineserver.entity.ProductCategory;
 import com.nicholas.fastmedicineserver.entity.ProductDetail;
 import com.nicholas.fastmedicineserver.entity.ProductDetailItem;
 import com.nicholas.fastmedicineserver.entity.ProductListItem;
+import com.nicholas.fastmedicineserver.entity.SearchKey;
 import com.nicholas.fastmedicineserver.integration.BaseConstants;
 import com.nicholas.fastmedicineserver.integration.WsResponse;
 import com.nicholas.fastmedicineserver.repository.CategoryRepository;
 import com.nicholas.fastmedicineserver.repository.DeviceRepository;
 import com.nicholas.fastmedicineserver.repository.FeedbackRepository;
 import com.nicholas.fastmedicineserver.repository.ProductDetailRepository;
+import com.nicholas.fastmedicineserver.repository.SearchKeyRepository;
 import com.nicholas.fastmedicineserver.integration.CommonMethod;
 
 ;
@@ -47,14 +49,13 @@ public class MedicineController
 	CategoryRepository categoryRepo;
 
 	@Autowired
-	ProductDetailRepository productDetailRepo;
-
-	@Autowired
 	DeviceRepository deviceRepo;
-	
 	
 	@Autowired
 	FeedbackRepository feedRepo;
+	
+	@Autowired
+	SearchKeyRepository searchRepo;
 
 	@Autowired
 	@Qualifier("userServiceImpl")
@@ -93,6 +94,11 @@ public class MedicineController
 			@RequestParam("la") String la,
 			@RequestParam("categoryId") String categoryId)
 	{
+		if (StringUtils.isBlank(lo)||StringUtils.isBlank(la)||StringUtils.isBlank(categoryId))
+		{
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		
 		Integer pharmacy_id=pharmacyService.getNearestPharmacy(Double.valueOf(la), Double.valueOf(lo));
 		if (pharmacy_id==null||pharmacy_id<=0)
 		{
@@ -122,6 +128,32 @@ public class MedicineController
 		}
 		return WsResponse.successResponse(list);
 	}
+	
+	
+	@RequestMapping(value="postSprecialPrice",method=RequestMethod.POST)
+	public WsResponse getSpecialPrice(HttpServletRequest request,
+			@RequestParam("lo") String lo,
+			@RequestParam("la") String la,
+			@RequestParam("categoryId") String categoryId)
+	{
+		if (StringUtils.isBlank(lo)||StringUtils.isBlank(la))
+		{
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		
+		Integer pharmacy_id=pharmacyService.getNearestPharmacy(Double.valueOf(la), Double.valueOf(lo));
+		if (pharmacy_id==null||pharmacy_id<=0)
+		{
+			return WsResponse.response("008", BaseConstants.noPharmacy);
+		}
+		List<ProductListItem> list = productService.getSpecPrice(pharmacy_id);
+		if (list!=null&&list.size()>0)
+		{
+			return WsResponse.successResponse(list);
+		}else {
+			return WsResponse.response("007", BaseConstants.searchNoResult);
+		}
+	}
 
 	/**
 	 * 获取产品详情
@@ -134,8 +166,6 @@ public class MedicineController
 			@RequestParam("productId") String productId,
 			@RequestParam("pharmacyId") String pharmacyId)
 	{
-		
-		//ProductDetail detail = productDetailRepo.findById(productId);
 		ProductDetailItem detail=productService.getDetail(Integer.valueOf(pharmacyId), Integer.valueOf(productId));
 		return WsResponse.successResponse(detail);
 	}
@@ -148,10 +178,22 @@ public class MedicineController
 	 */
 	@RequestMapping(value = "/postSearch", method = RequestMethod.POST)
 	public WsResponse postSearch(HttpServletRequest request,
+			@RequestParam("userId") String userId,
 			@RequestParam("keyword") String keyword,
 			@RequestParam("lo") String lo,
 			@RequestParam("la") String la)
 	{
+		if (StringUtils.isBlank(lo)||StringUtils.isBlank(la)||StringUtils.isBlank(keyword))
+		{
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		int id=StringUtils.isBlank(userId)?0:Integer.parseInt(userId);
+		SearchKey searchKey=new SearchKey();
+		searchKey.setCreatedTime(new Date());
+		searchKey.setKeyword(keyword);
+		searchKey.setUserId(id);
+		searchRepo.save(searchKey);
+
 		Integer pharmacy_id=pharmacyService.getNearestPharmacy(Double.valueOf(la), Double.valueOf(lo));
 		if (pharmacy_id==null||pharmacy_id<=0)
 		{
@@ -165,6 +207,32 @@ public class MedicineController
 			return WsResponse.successResponse(list);
 		}
 		return WsResponse.response("007", BaseConstants.searchNoResult);
+	}
+	
+	@RequestMapping(value = "/getHotKey", method = RequestMethod.GET)
+	public WsResponse getHotKey(HttpServletRequest request)
+	{
+		List<String> list=new ArrayList<String>();
+		List<SearchKey> searchKeys=searchRepo.findTopKeys();
+		for (SearchKey searchKey : searchKeys)
+		{
+			String t=searchKey.getKeyword();
+			if (!list.contains(t))
+			{
+				if (t.length()>5)
+				{
+					list.add(t.substring(0,4)+"...");
+				}else{
+					list.add(t);
+				}
+			}
+		}
+		if (list!=null&&list.size()>0)
+		{
+			return WsResponse.successResponse(list);
+		}else {
+			return WsResponse.response("007", BaseConstants.searchNoResult);
+		}
 	}
 
 	/**
@@ -294,7 +362,18 @@ public class MedicineController
 		}
 	}
 	
-	
+	/**
+	 * 提交地址
+	 * @param request
+	 * @param userId
+	 * @param city
+	 * @param receiver
+	 * @param phone
+	 * @param mapAdd
+	 * @param detailAdd
+	 * @param mapLongAdd
+	 * @return
+	 */
 	@RequestMapping(value = "/postAddress", method = RequestMethod.POST)
 	public WsResponse postAddress(HttpServletRequest request,
 			@RequestParam("userId") String userId,
@@ -325,6 +404,12 @@ public class MedicineController
 		
 	}
 	
+	/**
+	 * 获取地址
+	 * @param request
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping(value = "/getAddress", method = RequestMethod.POST)
 	public WsResponse getAddress(HttpServletRequest request,@RequestParam("userId") String userId)
 	{

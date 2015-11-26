@@ -39,5 +39,12 @@ public interface IProductSevice
 	List<ProductListItem> getProcuctBySearch(Integer ph,String key);
 	
 	
+	/**
+	 * 获取特价药品
+	 * @param ph
+	 * @return
+	 */
+	List<ProductListItem> getSpecPrice(Integer ph);
+	
 	
 }

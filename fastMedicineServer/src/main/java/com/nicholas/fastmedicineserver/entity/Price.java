@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.neo4j.cypher.internal.compiler.v2_1.ast.False;
+
 
 @Entity
 @Table(name="t_price")
@@ -32,7 +34,33 @@ public class Price
 	@Column(name = "categoryId",nullable = false)
 	private Integer categoryId;// 商品分类id
 	
+	@Column(name="shakeStatus",nullable=false)
+	private Integer shakeStatus;//0: 不参与摇一摇 1：摇一摇
 	
+	@Column(name="specialPrice",nullable=false)
+	private Integer specialPrice;//0:特价 1：非特价
+	
+	
+
+	public Integer getShakeStatus()
+	{
+		return shakeStatus;
+	}
+
+	public void setShakeStatus(Integer shakeStatus)
+	{
+		this.shakeStatus = shakeStatus;
+	}
+
+	public Integer getSpecialPrice()
+	{
+		return specialPrice;
+	}
+
+	public void setSpecialPrice(Integer specialPrice)
+	{
+		this.specialPrice = specialPrice;
+	}
 
 	public Integer getCategoryId()
 	{

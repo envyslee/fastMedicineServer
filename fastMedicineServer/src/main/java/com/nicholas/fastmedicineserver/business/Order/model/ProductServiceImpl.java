@@ -28,7 +28,6 @@ public class ProductServiceImpl implements IProductSevice
 	@Autowired
 	PharmacyRepository pharmacyRepo;
 	
-
 	@Override
 	public List<Price> getProducts(Integer p,Integer c)
 	{
@@ -97,9 +96,10 @@ public class ProductServiceImpl implements IProductSevice
 				item.setProductDesc(usage);
 				item.setProductId(detail.getId());
 				item.setProductSale(detail.getProductSale());
-				item.setProductPrice(detail.getProductPrice());
+				item.setProductPrice(price.getProductPrice());
 				item.setProductSpec(detail.getProductSpec());
 				item.setProductName(detail.getProductName());
+				item.setPharmacyId(price.getPharmacyId());
 				items.add(item);
 			}
 		}
@@ -110,6 +110,33 @@ public class ProductServiceImpl implements IProductSevice
 			return items;
 		}
 		
+	}
+
+	@Override
+	public List<ProductListItem> getSpecPrice(Integer ph)
+	{
+		List<Price> priceList=priceRepo.findSepcPrice(ph);
+		ProductListItem item=new ProductListItem();
+		List<ProductListItem> specPriceList=new ArrayList<ProductListItem>();
+		for (Price price : priceList)
+		{
+			ProductDetail tDetail=productRepo.findById(price.getProductId());
+			item.setIconUrl(tDetail.getProductPics());
+			item.setPharmacyId(price.getPharmacyId());
+			String usage = tDetail.getProductUsage();
+			if (usage.length() > 28)
+			{
+				usage = usage.substring(0, 28) + "...";
+			}
+			item.setProductDesc(usage);
+			item.setProductId(price.getProductId());
+			item.setProductName(tDetail.getProductName());
+			item.setProductPrice(price.getProductPrice());
+			item.setProductSale(tDetail.getProductSale());
+			item.setProductSpec(tDetail.getProductSpec());
+			specPriceList.add(item);
+		}
+		return specPriceList;
 	}
 
 }

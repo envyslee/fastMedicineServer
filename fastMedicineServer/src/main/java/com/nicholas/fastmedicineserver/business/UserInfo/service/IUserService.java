@@ -26,7 +26,7 @@ public interface IUserService
 	 * 注册
 	 * @return
 	 */
-	Long registerUser(String phoneNum,String password);
+	Integer registerUser(String phoneNum,String password);
 	
 	/**
 	 * 登录

@@ -18,12 +18,12 @@ import javax.persistence.TemporalType;
 public class UserInfo
 {
 	
-	public Long getId()
+	public Integer getId()
 	{
 		return id;
 	}
 
-	public void setId(Long id)
+	public void setId(Integer id)
 	{
 		this.id = id;
 	}
@@ -67,11 +67,25 @@ public class UserInfo
 	{
 		this.createdTime = createdTime;
 	}
+	
+	
+
+	public String getChannel()
+	{
+		return channel;
+	}
+
+	public void setChannel(String channel)
+	{
+		this.channel = channel;
+	}
+
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	private Long id;// 自增序列号
+	private Integer id;// 自增序列号
 
 
 	@Column(name = "phoneNum", length = 11, nullable = false)
@@ -82,6 +96,9 @@ public class UserInfo
 	
 	@Column(name="userPoint",nullable=false)
 	private Integer userPoint;//用户积分
+	
+	@Column(name="channel",nullable=false)
+	private String channel;//渠道
 	
 	@Column(name = "createdTime")
 	@Temporal(TemporalType.TIMESTAMP)

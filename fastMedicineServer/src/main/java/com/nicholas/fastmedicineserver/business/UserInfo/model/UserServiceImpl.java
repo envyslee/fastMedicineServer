@@ -44,7 +44,7 @@ public class UserServiceImpl implements IUserService
 	}
 	
 	@Override
-	public Long registerUser(String phoneNum,String password)
+	public Integer registerUser(String phoneNum,String password)
 	{
 		UserInfo info=new UserInfo();
 		info.setPhoneNum(phoneNum);

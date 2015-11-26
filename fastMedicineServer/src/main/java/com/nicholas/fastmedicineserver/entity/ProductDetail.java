@@ -30,8 +30,7 @@ public class ProductDetail
 	@Column(name="productPics",length = 255)
 	private String productPics;//商品连扳图
 	
-	@Column(name="shakeStatus",nullable=false)
-	private Integer shakeStatus;//0: 不参与摇一摇 1：摇一摇
+
 
 	@Column(name = "productKey", length = 255, nullable = false)
 	private String productKey;// 商品关键词
@@ -91,10 +90,6 @@ public class ProductDetail
 		this.pharmacyId = pharmacyId;
 	}
 
-	public Integer getShakeStatus()
-	{
-		return shakeStatus;
-	}
 
 	public String getUsageAmount()
 	{
@@ -259,15 +254,7 @@ public class ProductDetail
 		this.productPics = productPics;
 	}
 
-	public Integer isShakeStatus()
-	{
-		return shakeStatus;
-	}
-
-	public void setShakeStatus(Integer shakeStatus)
-	{
-		this.shakeStatus = shakeStatus;
-	}
+	
 
 	public String getProductKey()
 	{
