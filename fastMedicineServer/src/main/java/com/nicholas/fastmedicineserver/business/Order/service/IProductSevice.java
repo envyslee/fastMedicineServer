@@ -9,19 +9,13 @@ import com.nicholas.fastmedicineserver.entity.ProductListItem;
 
 public interface IProductSevice
 {
-	
-	
-	List<Price> getProducts(Integer p, Integer c);
-
-	
-	
 	/**
 	 * 获取商品列表
 	 * @param p 药店id
 	 * @param c 分类id
 	 * @return
 	 */
-	List<ProductDetail> getProductDetails(int p, int c);
+	List<ProductListItem> getProductDetails(int p, int c,int i);
 	
 	/**
 	 * 获取商品详情
@@ -44,7 +38,7 @@ public interface IProductSevice
 	 * @param ph
 	 * @return
 	 */
-	List<ProductListItem> getSpecPrice(Integer ph);
+	List<ProductListItem> getSpecPrice(Integer ph,Integer i);
 	
 	
 }

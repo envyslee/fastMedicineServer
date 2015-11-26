@@ -3,6 +3,7 @@ package com.nicholas.fastmedicineserver.business.Order.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,25 +29,34 @@ public class ProductServiceImpl implements IProductSevice
 	@Autowired
 	PharmacyRepository pharmacyRepo;
 	
-	@Override
-	public List<Price> getProducts(Integer p,Integer c)
-	{
-		return priceRepo.getList(p, c);
-	}
+	
 	
 	@Override
-	public List<ProductDetail> getProductDetails(int p,int c)
+	public List<ProductListItem> getProductDetails(int p,int c,int i)
 	{
-		List<ProductDetail> productDetails=new ArrayList<ProductDetail>();
-		List<Price> list=priceRepo.getList(p, c);
+		List<ProductListItem> items = new ArrayList<ProductListItem>();
+		List<Price> list=priceRepo.getList(p, c,i*15);
 		for (Price price : list)
 		{
-			ProductDetail tDetail=productRepo.findById(price.getProductId());
-			tDetail.setProductPrice(price.getProductPrice());
-			tDetail.setPharmacyId(price.getPharmacyId());
-			productDetails.add(tDetail);
+			ProductListItem item = new ProductListItem();
+			ProductDetail tmp=productRepo.findById(price.getProductId());
+			item.setProductId(tmp.getId());
+			item.setIconUrl(tmp.getProductPics());
+			item.setProductName(tmp.getProductName());
+			String usage = tmp.getProductUsage();
+			if (usage.length() > 28)
+			{
+				usage = usage.substring(0, 28) + "...";
+			}
+			item.setProductDesc(usage);
+			item.setProductSpec(tmp.getProductSpec());
+			item.setProductSale(tmp.getProductSale());
+			item.setProductPrice(price.getProductPrice());
+			item.setPharmacyId(price.getPharmacyId());
+			
+			items.add(item);
 		}
-		return productDetails;
+		return items;
 	}
 
 	@Override
@@ -113,9 +123,9 @@ public class ProductServiceImpl implements IProductSevice
 	}
 
 	@Override
-	public List<ProductListItem> getSpecPrice(Integer ph)
+	public List<ProductListItem> getSpecPrice(Integer ph,Integer i)
 	{
-		List<Price> priceList=priceRepo.findSepcPrice(ph);
+		List<Price> priceList=priceRepo.findSepcPrice(ph,i*15);
 		ProductListItem item=new ProductListItem();
 		List<ProductListItem> specPriceList=new ArrayList<ProductListItem>();
 		for (Price price : priceList)

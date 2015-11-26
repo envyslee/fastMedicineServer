@@ -3,15 +3,10 @@ package com.nicholas.fastmedicineserver.restservice;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.Null;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jboss.logging.annotations.Param;
-import org.opensaml.xml.encryption.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +21,6 @@ import com.nicholas.fastmedicineserver.entity.Address;
 import com.nicholas.fastmedicineserver.entity.DeviceInfo;
 import com.nicholas.fastmedicineserver.entity.Feedback;
 import com.nicholas.fastmedicineserver.entity.ProductCategory;
-import com.nicholas.fastmedicineserver.entity.ProductDetail;
 import com.nicholas.fastmedicineserver.entity.ProductDetailItem;
 import com.nicholas.fastmedicineserver.entity.ProductListItem;
 import com.nicholas.fastmedicineserver.entity.SearchKey;
@@ -35,11 +29,9 @@ import com.nicholas.fastmedicineserver.integration.WsResponse;
 import com.nicholas.fastmedicineserver.repository.CategoryRepository;
 import com.nicholas.fastmedicineserver.repository.DeviceRepository;
 import com.nicholas.fastmedicineserver.repository.FeedbackRepository;
-import com.nicholas.fastmedicineserver.repository.ProductDetailRepository;
 import com.nicholas.fastmedicineserver.repository.SearchKeyRepository;
 import com.nicholas.fastmedicineserver.integration.CommonMethod;
 
-;
 
 @RestController
 @RequestMapping("/medicine")
@@ -92,7 +84,8 @@ public class MedicineController
 	public WsResponse getProductList(HttpServletRequest request,
 			@RequestParam("lo") String lo,
 			@RequestParam("la") String la,
-			@RequestParam("categoryId") String categoryId)
+			@RequestParam("categoryId") String categoryId,
+			@RequestParam("index") String index)
 	{
 		if (StringUtils.isBlank(lo)||StringUtils.isBlank(la)||StringUtils.isBlank(categoryId))
 		{
@@ -104,37 +97,25 @@ public class MedicineController
 		{
 			return WsResponse.response("008", BaseConstants.noPharmacy);
 		}
-		
-		List<ProductListItem> list = new ArrayList<ProductListItem>();
-		List<ProductDetail> tmp = productService.getProductDetails(pharmacy_id.intValue(),Integer.parseInt(categoryId));
-		
-		for (ProductDetail detail : tmp)
-		{
-			ProductListItem item = new ProductListItem();
-			item.setProductId(detail.getId());
-			item.setIconUrl(detail.getProductPics());
-			item.setProductName(detail.getProductName());
-			String usage = detail.getProductUsage();
-			if (usage.length() > 28)
-			{
-				usage = usage.substring(0, 28) + "...";
-			}
-			item.setProductDesc(usage);
-			item.setProductSpec(detail.getProductSpec());
-			item.setProductSale(detail.getProductSale());
-			item.setProductPrice(detail.getProductPrice());
-			item.setPharmacyId(detail.getPharmacyId());
-			list.add(item);
-		}
+		List<ProductListItem> list = productService.getProductDetails(pharmacy_id.intValue(),Integer.parseInt(categoryId),Integer.parseInt(index));
 		return WsResponse.successResponse(list);
 	}
 	
 	
+	/**
+	 * 获取特价商品
+	 * @param request
+	 * @param lo
+	 * @param la
+	 * @param categoryId
+	 * @return
+	 */
 	@RequestMapping(value="postSprecialPrice",method=RequestMethod.POST)
 	public WsResponse getSpecialPrice(HttpServletRequest request,
 			@RequestParam("lo") String lo,
 			@RequestParam("la") String la,
-			@RequestParam("categoryId") String categoryId)
+			@RequestParam("categoryId") String categoryId,
+			@RequestParam("index") String index)
 	{
 		if (StringUtils.isBlank(lo)||StringUtils.isBlank(la))
 		{
@@ -146,7 +127,7 @@ public class MedicineController
 		{
 			return WsResponse.response("008", BaseConstants.noPharmacy);
 		}
-		List<ProductListItem> list = productService.getSpecPrice(pharmacy_id);
+		List<ProductListItem> list = productService.getSpecPrice(pharmacy_id,Integer.parseInt(index));
 		if (list!=null&&list.size()>0)
 		{
 			return WsResponse.successResponse(list);

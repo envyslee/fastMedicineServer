@@ -71,7 +71,7 @@ public class ProductDetail
 	@Column(name = "productSpec", length = 255, nullable = false)
 	private String productSpec;// 商品规格
 	
-	@Column(name = "productPrice", length = 50, nullable = false)
+	@Column(name = "productPrice", nullable = false)
 	private BigDecimal productPrice;// 商品价格
 	
 	@Column(name = "productSale",  nullable = false)

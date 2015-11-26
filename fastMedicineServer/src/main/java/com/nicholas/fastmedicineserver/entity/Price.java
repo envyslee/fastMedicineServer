@@ -24,7 +24,7 @@ public class Price
 	@Column(name = "pharmacyId", nullable = false)
 	private Integer pharmacyId;// 药店id
 	
-	@Column(name = "productPrice", length = 100, nullable = false)
+	@Column(name = "productPrice", nullable = false)
 	private BigDecimal productPrice;// 商品价格
 	
 	@Column(name = "productId",nullable = false)
