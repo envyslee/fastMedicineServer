@@ -128,12 +128,7 @@ public class MedicineController
 			return WsResponse.response("008", BaseConstants.noPharmacy);
 		}
 		List<ProductListItem> list = productService.getSpecPrice(pharmacy_id,Integer.parseInt(index));
-		if (list!=null&&list.size()>0)
-		{
-			return WsResponse.successResponse(list);
-		}else {
-			return WsResponse.response("007", BaseConstants.searchNoResult);
-		}
+		return WsResponse.successResponse(list);
 	}
 
 	/**
@@ -190,6 +185,11 @@ public class MedicineController
 		return WsResponse.response("007", BaseConstants.searchNoResult);
 	}
 	
+	/**
+	 * 获取热搜
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/getHotKey", method = RequestMethod.GET)
 	public WsResponse getHotKey(HttpServletRequest request)
 	{
