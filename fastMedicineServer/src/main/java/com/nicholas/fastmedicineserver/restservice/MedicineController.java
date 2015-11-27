@@ -407,5 +407,27 @@ public class MedicineController
 			return WsResponse.response("010", BaseConstants.exception);
 		}
 	}
-
+	
+	
+	/**
+	 * 获取摇一摇
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/getShake", method = RequestMethod.POST)
+	public WsResponse getShake(HttpServletRequest request,
+			@RequestParam("lo") String lo,
+			@RequestParam("la") String la) {
+		if (StringUtils.isBlank(lo)||StringUtils.isBlank(la))
+		{
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		Integer pharmacy_id=pharmacyService.getNearestPharmacy(Double.valueOf(la), Double.valueOf(lo));
+		if (pharmacy_id==null||pharmacy_id<=0)
+		{
+			return WsResponse.response("008", BaseConstants.noPharmacy);
+		}
+		ProductListItem item=productService.getShakePrice(pharmacy_id);
+		return WsResponse.successResponse(item);
+	}
 }

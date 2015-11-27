@@ -41,4 +41,10 @@ public interface IProductSevice
 	List<ProductListItem> getSpecPrice(Integer ph,Integer i);
 	
 	
+	/**
+	 * 获取摇一摇商品
+	 * @param ph
+	 * @return
+	 */
+	ProductListItem getShakePrice(Integer ph);
 }

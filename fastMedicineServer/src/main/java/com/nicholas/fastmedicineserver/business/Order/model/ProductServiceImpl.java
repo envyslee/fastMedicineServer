@@ -2,6 +2,7 @@ package com.nicholas.fastmedicineserver.business.Order.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.neo4j.cypher.internal.compiler.v2_1.docbuilders.internalDocBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,6 +148,24 @@ public class ProductServiceImpl implements IProductSevice
 			specPriceList.add(item);
 		}
 		return specPriceList;
+	}
+	
+
+	@Override
+	public ProductListItem getShakePrice(Integer ph) {
+		List<Price> prices=priceRepo.findShake(ph);
+		int size=prices.size();
+		Random random=new Random();
+		int index=random.nextInt(size);
+		ProductListItem item=new ProductListItem();
+		int productId=prices.get(index).getProductId();
+		ProductDetail detail=productRepo.findById(productId);
+		item.setIconUrl(detail.getProductPics());
+		item.setProductName(detail.getProductName());
+		item.setProductPrice(prices.get(index).getProductPrice());
+		item.setPharmacyId(prices.get(index).getPharmacyId());
+		item.setProductId(productId);
+		return item;
 	}
 
 }
