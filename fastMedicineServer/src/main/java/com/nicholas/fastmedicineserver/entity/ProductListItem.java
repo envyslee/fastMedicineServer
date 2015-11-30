@@ -33,6 +33,29 @@ public class ProductListItem
 	
 	private Integer pharmacyId;// 药店id
 	
+	private String pharmacyName;//药店名称
+	
+	
+	private Integer priceId;//对应药店商品id
+	
+	
+
+	public String getPharmacyName() {
+		return pharmacyName;
+	}
+
+	public void setPharmacyName(String pharmacyName) {
+		this.pharmacyName = pharmacyName;
+	}
+
+	public Integer getPriceId() {
+		return priceId;
+	}
+
+	public void setPriceId(Integer priceId) {
+		this.priceId = priceId;
+	}
+	
 	public Integer getPharmacyId()
 	{
 		return pharmacyId;

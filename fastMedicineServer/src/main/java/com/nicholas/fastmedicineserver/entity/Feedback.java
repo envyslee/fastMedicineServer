@@ -28,7 +28,7 @@ public class Feedback
 	private String feedContent;// 反馈内容
 	
 	@Column(name="userId",nullable=false)
-	private Long userId;
+	private Integer userId;//用户id
 	
 	@Column(name = "appVersion", length = 10, nullable = false)
 	private String appVersion;// 应用版本号
@@ -72,12 +72,12 @@ public class Feedback
 		this.feedContent = feedContent;
 	}
 
-	public Long getUserId()
+	public Integer getUserId()
 	{
 		return userId;
 	}
 
-	public void setUserId(Long userId)
+	public void setUserId(Integer userId)
 	{
 		this.userId = userId;
 	}

@@ -19,4 +19,8 @@ public class BaseConstants
 	public static String searchNoResult="没有搜索到相关内容";//007
 	
 	public static String noPharmacy="没有找到附近药店";//008
+	
+	public static String noStock="库存不足";//009
+	
+	public static String noCarData="购物车里空空如也";//011
 }

@@ -33,7 +33,7 @@ public class UserServiceImpl implements IUserService
 	}
 	
 	@Override
-	public boolean isUserExistById(Long id)
+	public boolean isUserExistById(Integer id)
 	{
 		UserInfo userInfo=userRepo.findById(id);
 		if (userInfo==null)

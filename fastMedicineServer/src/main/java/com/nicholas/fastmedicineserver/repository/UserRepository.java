@@ -8,5 +8,5 @@ public interface UserRepository extends JpaRepository<UserInfo, Integer>
 {
 		UserInfo findByPhoneNum(String num);
 		
-		UserInfo findById(Long id);
+		UserInfo findById(Integer id);
 }

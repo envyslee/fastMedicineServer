@@ -24,4 +24,8 @@ public interface PriceRepository extends JpaRepository<Price, Integer>
 	@Query(nativeQuery=true,value="SELECT * from t_price WHERE  pharmacy_id=?1 and shake_status=1")
 	List<Price> findShake(Integer ph);
 	
+	Price findById(Integer id);
+	
+
+	
 }

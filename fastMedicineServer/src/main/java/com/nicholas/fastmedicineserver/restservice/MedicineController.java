@@ -18,6 +18,7 @@ import com.nicholas.fastmedicineserver.business.Distance.service.IPharmacyServic
 import com.nicholas.fastmedicineserver.business.Order.service.IProductSevice;
 import com.nicholas.fastmedicineserver.business.UserInfo.service.IUserService;
 import com.nicholas.fastmedicineserver.entity.Address;
+import com.nicholas.fastmedicineserver.entity.CarListItem;
 import com.nicholas.fastmedicineserver.entity.DeviceInfo;
 import com.nicholas.fastmedicineserver.entity.Feedback;
 import com.nicholas.fastmedicineserver.entity.ProductCategory;
@@ -298,7 +299,6 @@ public class MedicineController
 		{
 			return WsResponse.response("010", BaseConstants.exception);
 		}
-
 	}
 	
 	/**
@@ -320,7 +320,7 @@ public class MedicineController
 		{
 			return WsResponse.response("001", BaseConstants.paramError);
 		}
-		Long idLong=Long.valueOf(userId);
+		Integer idLong=Integer.valueOf(userId);
 		try
 		{
 			if (!userService.isUserExistById(idLong))
@@ -429,5 +429,49 @@ public class MedicineController
 		}
 		ProductListItem item=productService.getShakePrice(pharmacy_id);
 		return WsResponse.successResponse(item);
+	}
+	
+	/**
+	 * 添加到购物车
+	 * @param request
+	 * @param userId
+	 * @param priceId
+	 * @param count
+	 * @return
+	 */
+	@RequestMapping(value="/postIntoCar",method=RequestMethod.POST)
+	public WsResponse addToCar(HttpServletRequest request,
+			@RequestParam("userId") String userId,
+			@RequestParam("priceId") String priceId,
+			@RequestParam("count") String count) {
+		if (StringUtils.isBlank(userId)||StringUtils.isBlank(priceId)) {
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		if (productService.addIntoCar(Integer.parseInt(userId), Integer.parseInt(priceId), Integer.parseInt(count))) {
+			return WsResponse.successResponse();
+		}else {
+			return WsResponse.response("009", BaseConstants.noStock);
+		}
+		
+	}
+	
+	/**
+	 * 获取购物车数据
+	 * @param request
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value="/getCarList",method=RequestMethod.POST)
+	public WsResponse getCarList(HttpServletRequest request,
+			@RequestParam("userId") String userId) {
+		if (StringUtils.isBlank(userId)) {
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		List<ProductListItem> carList=productService.getCarList(Integer.parseInt(userId));
+		if (carList==null) {
+			return WsResponse.response("011", BaseConstants.noCarData);
+		}else {
+			return WsResponse.successResponse(carList);
+		}
 	}
 }

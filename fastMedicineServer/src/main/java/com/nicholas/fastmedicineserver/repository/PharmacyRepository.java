@@ -7,4 +7,5 @@ import com.nicholas.fastmedicineserver.entity.Pharmacy;
 public interface PharmacyRepository extends JpaRepository<Pharmacy, Integer>
 {
 	Pharmacy findById(Integer id);
+	
 }

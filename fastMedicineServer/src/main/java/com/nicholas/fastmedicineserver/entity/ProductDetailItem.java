@@ -36,7 +36,26 @@ public class ProductDetailItem
 	
 	private String pharmacyAddress;//药店地址
 	
+	private Integer maxCount;//库存
 	
+	private Integer priceId;//对应药店商品id
+	
+
+	public Integer getPriceId() {
+		return priceId;
+	}
+
+	public void setPriceId(Integer priceId) {
+		this.priceId = priceId;
+	}
+
+	public Integer getMaxCount() {
+		return maxCount;
+	}
+
+	public void setMaxCount(Integer maxCount) {
+		this.maxCount = maxCount;
+	}
 
 	public String getPharmacyAddress()
 	{

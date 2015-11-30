@@ -39,8 +39,18 @@ public class Price
 	
 	@Column(name="specialPrice",nullable=false)
 	private Integer specialPrice;//0:特价 1：非特价
+
+	@Column(name = "maxCount", nullable = false)
+	private Integer maxCount;//库存
 	
 	
+	public Integer getMaxCount() {
+		return maxCount;
+	}
+
+	public void setMaxCount(Integer maxCount) {
+		this.maxCount = maxCount;
+	}
 
 	public Integer getShakeStatus()
 	{

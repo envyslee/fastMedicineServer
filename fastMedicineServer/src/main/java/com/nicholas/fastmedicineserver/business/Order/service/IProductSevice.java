@@ -2,6 +2,7 @@ package com.nicholas.fastmedicineserver.business.Order.service;
 
 import java.util.List;
 
+import com.nicholas.fastmedicineserver.entity.CarListItem;
 import com.nicholas.fastmedicineserver.entity.Price;
 import com.nicholas.fastmedicineserver.entity.ProductDetail;
 import com.nicholas.fastmedicineserver.entity.ProductDetailItem;
@@ -47,4 +48,22 @@ public interface IProductSevice
 	 * @return
 	 */
 	ProductListItem getShakePrice(Integer ph);
+	
+	
+	/**
+	 * 加入购物车
+	 * @param userId
+	 * @param priceId
+	 * @param count
+	 * @return
+	 */
+	boolean addIntoCar(Integer userId,Integer priceId,Integer count);
+	
+	
+	/**
+	 * 获取购物车数据
+	 * @param userId
+	 * @return
+	 */
+	List<ProductListItem> getCarList(Integer userId);
 }

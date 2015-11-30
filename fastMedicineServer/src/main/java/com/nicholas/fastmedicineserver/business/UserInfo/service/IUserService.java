@@ -19,7 +19,7 @@ public interface IUserService
 	 * 通过id查找用户,判断是否存在
 	 * @return
 	 */
-	boolean isUserExistById(Long id);
+	boolean isUserExistById(Integer id);
 	
 	
 	/**

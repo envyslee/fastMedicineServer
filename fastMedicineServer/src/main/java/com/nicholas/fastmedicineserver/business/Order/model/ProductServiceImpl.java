@@ -1,6 +1,7 @@
 package com.nicholas.fastmedicineserver.business.Order.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -9,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nicholas.fastmedicineserver.business.Order.service.IProductSevice;
+import com.nicholas.fastmedicineserver.entity.Car;
+import com.nicholas.fastmedicineserver.entity.CarListItem;
 import com.nicholas.fastmedicineserver.entity.Pharmacy;
 import com.nicholas.fastmedicineserver.entity.Price;
 import com.nicholas.fastmedicineserver.entity.ProductDetail;
 import com.nicholas.fastmedicineserver.entity.ProductDetailItem;
 import com.nicholas.fastmedicineserver.entity.ProductListItem;
+import com.nicholas.fastmedicineserver.repository.CarRepository;
 import com.nicholas.fastmedicineserver.repository.PharmacyRepository;
 import com.nicholas.fastmedicineserver.repository.PriceRepository;
 import com.nicholas.fastmedicineserver.repository.ProductDetailRepository;
@@ -29,6 +33,9 @@ public class ProductServiceImpl implements IProductSevice
 	
 	@Autowired
 	PharmacyRepository pharmacyRepo;
+	
+	@Autowired
+	CarRepository carRepo;
 	
 	
 	
@@ -83,6 +90,7 @@ public class ProductServiceImpl implements IProductSevice
 		productDetailItem.setProductUsage(tDetail.getProductUsage());
 		productDetailItem.setUntowardEffect(tDetail.getUntowardEffect());
 		productDetailItem.setUsageAmount(tDetail.getUsageAmount());
+		productDetailItem.setPriceId(price.getId());
 		return productDetailItem;
 	}
 
@@ -166,6 +174,49 @@ public class ProductServiceImpl implements IProductSevice
 		item.setPharmacyId(prices.get(index).getPharmacyId());
 		item.setProductId(productId);
 		return item;
+	}
+
+	@Override
+	public boolean addIntoCar(Integer userId, Integer priceId, Integer count) {
+		Price price=priceRepo.findById(priceId);
+		if(price.getMaxCount()>count){
+			Car car=new Car();
+			car.setCreatedTime(new Date());
+			car.setPriceId(priceId);
+			car.setUserId(userId);
+			car.setIsAbandoned(0);;
+			carRepo.save(car);
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	@Override
+	public List<ProductListItem> getCarList(Integer userId) {
+		List<Car> cars=carRepo.findCarList(userId);
+		//List<CarListItem> carList=new ArrayList<CarListItem>();
+		if (cars!=null&&cars.size()>0) {
+			List<ProductListItem> productList=new ArrayList<ProductListItem>();
+			for (Car car : cars) {
+				Price price=priceRepo.findById(car.getPriceId());
+				ProductDetail detail=productRepo.findById(price.getProductId());
+				Pharmacy pharmacy=pharmacyRepo.findById(price.getPharmacyId());
+				String pharmacyName=pharmacy.getPharmacyName();
+				ProductListItem listItem=new ProductListItem();
+				listItem.setIconUrl(detail.getProductPics());
+				listItem.setPriceId(car.getId());
+				listItem.setProductName(detail.getProductName());
+				listItem.setProductPrice(price.getProductPrice());
+				listItem.setProductSpec(detail.getProductSpec());
+				listItem.setPharmacyName(pharmacyName);
+				productList.add(listItem);
+			}
+			return productList;
+		}else {
+			return null;
+		}
+		
 	}
 
 }
