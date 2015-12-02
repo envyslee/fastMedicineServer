@@ -23,4 +23,8 @@ public class BaseConstants
 	public static String noStock="库存不足";//009
 	
 	public static String noCarData="购物车里空空如也";//011
+	
+	public static String carExist="商品已经在购物车里了哦";//012
+	
+	public static String noCard="您没有可使用的优惠券";//013
 }

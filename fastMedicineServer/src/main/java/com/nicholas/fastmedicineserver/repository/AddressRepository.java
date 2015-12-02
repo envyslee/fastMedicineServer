@@ -9,4 +9,8 @@ import com.nicholas.fastmedicineserver.entity.Address;
 public interface AddressRepository extends JpaRepository<Address, Integer>
 {
 	List<Address> findByUserId(Integer userId);
+	
+	Address findByUserIdAndIsDefault(Integer userId,Integer isDefault);
+	
+	Address findById(Integer id);
 }

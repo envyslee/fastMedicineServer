@@ -3,6 +3,7 @@ package com.nicholas.fastmedicineserver.business.UserInfo.service;
 import java.util.List;
 
 import com.nicholas.fastmedicineserver.entity.Address;
+import com.nicholas.fastmedicineserver.entity.Card;
 
 
 public interface IUserService
@@ -53,4 +54,25 @@ public interface IUserService
 	 * @return
 	 */
 	List<Address> getAddress(Integer userId);
+	
+	
+	/**
+	 * 更新默认地址
+	 * @param addressId
+	 */
+	void updateDefaultAddress(Integer userId,Integer addressId);
+	
+	/**
+	 * 获取用户积分
+	 * @param userId
+	 * @return
+	 */
+	int getPoint(Integer userId);
+	
+	/**
+	 * 获取优惠卡券
+	 * @param userId
+	 * @return
+	 */
+	List<Card> getCard(Integer userId);
 }

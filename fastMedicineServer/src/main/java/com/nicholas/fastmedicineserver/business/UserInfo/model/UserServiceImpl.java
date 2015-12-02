@@ -1,15 +1,23 @@
 package com.nicholas.fastmedicineserver.business.UserInfo.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import scala.collection.mutable.HashMap;
+
 import com.nicholas.fastmedicineserver.business.UserInfo.service.IUserService;
 import com.nicholas.fastmedicineserver.entity.Address;
+import com.nicholas.fastmedicineserver.entity.Card;
+import com.nicholas.fastmedicineserver.entity.MyCard;
 import com.nicholas.fastmedicineserver.entity.UserInfo;
 import com.nicholas.fastmedicineserver.repository.AddressRepository;
+import com.nicholas.fastmedicineserver.repository.CardRepository;
+import com.nicholas.fastmedicineserver.repository.MyCardRepository;
 import com.nicholas.fastmedicineserver.repository.UserRepository;
 
 @Component
@@ -20,6 +28,12 @@ public class UserServiceImpl implements IUserService
 	
 	@Autowired
 	AddressRepository addressRepo;
+	
+	@Autowired
+	MyCardRepository myCardRepo;
+	
+	@Autowired
+	CardRepository cardRepo;
 	
 	@Override
 	public boolean isUserExistByPhone(String num)
@@ -69,6 +83,11 @@ public class UserServiceImpl implements IUserService
 	public void submitAddress(Integer userId, String city, String receiver,
 			String phone, String mapAdd, String detailAdd,String mapLongAdd)
 	{
+		Address defaultAddress=addressRepo.findByUserIdAndIsDefault(userId, 1);
+		if (defaultAddress!=null) {
+			defaultAddress.setIsDefault(0);
+			addressRepo.save(defaultAddress);
+		}
 		Address address=new Address();
 		address.setCity(city);
 		address.setDetailAdd(detailAdd);
@@ -77,8 +96,9 @@ public class UserServiceImpl implements IUserService
 		address.setReceiver(receiver);
 		address.setUserId(userId);
 		address.setMapLongAdd(mapLongAdd);
+		address.setIsDefault(1);
 		addressRepo.save(address);
-		Integer id=address.getId();
+		//Integer id=address.getId();
 	}
 
 	@Override
@@ -87,5 +107,40 @@ public class UserServiceImpl implements IUserService
 		List<Address> list=addressRepo.findByUserId(userId);
 		return list;
 	}
+
+	@Override
+	public void updateDefaultAddress(Integer userId,Integer addressId) {
+		Address defaultAddress=addressRepo.findByUserIdAndIsDefault(userId, 1);
+		defaultAddress.setIsDefault(0);
+		addressRepo.save(defaultAddress);
+		Address newDefault=addressRepo.findById(addressId);
+		newDefault.setIsDefault(1);
+		addressRepo.save(newDefault);
+	}
+
+	@Override
+	public int getPoint(Integer userId) {
+		UserInfo info=userRepo.findById(userId);
+		return info.getUserPoint();
+	}
+
+	@Override
+	public List<Card> getCard(Integer userId) {
+		List<Card> list=new ArrayList<Card>();
+		List<MyCard> myCards=myCardRepo.findByUserIdAndUseStatus(userId, 0);
+		for (MyCard myCard : myCards) {
+			Card card=cardRepo.findById(myCard.getCardId());
+			if (card.getOverTime().before(new Date())) {
+				myCard.setUseStatus(2);
+				myCardRepo.save(myCard);
+			}else {
+				
+				list.add(card);
+			}
+		}
+		return list;
+	}
+
+	
 	
 }

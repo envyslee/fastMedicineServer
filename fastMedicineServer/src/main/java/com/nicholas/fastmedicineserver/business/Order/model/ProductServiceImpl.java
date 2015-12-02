@@ -1,5 +1,6 @@
 package com.nicholas.fastmedicineserver.business.Order.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -177,25 +178,27 @@ public class ProductServiceImpl implements IProductSevice
 	}
 
 	@Override
-	public boolean addIntoCar(Integer userId, Integer priceId, Integer count) {
+	public int addIntoCar(Integer userId, Integer priceId, Integer count) {
+		if (carRepo.findByUserIdAndPriceId(userId,priceId)!=null) {
+			return 2;
+		}
 		Price price=priceRepo.findById(priceId);
-		if(price.getMaxCount()>count){
+		if(price!=null&&price.getMaxCount()>count){
 			Car car=new Car();
 			car.setCreatedTime(new Date());
 			car.setPriceId(priceId);
 			car.setUserId(userId);
 			car.setIsAbandoned(0);;
 			carRepo.save(car);
-			return true;
+			return 0;
 		}else{
-			return false;
+			return 1;
 		}
 	}
 
 	@Override
 	public List<ProductListItem> getCarList(Integer userId) {
 		List<Car> cars=carRepo.findCarList(userId);
-		//List<CarListItem> carList=new ArrayList<CarListItem>();
 		if (cars!=null&&cars.size()>0) {
 			List<ProductListItem> productList=new ArrayList<ProductListItem>();
 			for (Car car : cars) {
@@ -205,11 +208,14 @@ public class ProductServiceImpl implements IProductSevice
 				String pharmacyName=pharmacy.getPharmacyName();
 				ProductListItem listItem=new ProductListItem();
 				listItem.setIconUrl(detail.getProductPics());
-				listItem.setPriceId(car.getId());
+				listItem.setPriceId(car.getPriceId());
 				listItem.setProductName(detail.getProductName());
 				listItem.setProductPrice(price.getProductPrice());
 				listItem.setProductSpec(detail.getProductSpec());
 				listItem.setPharmacyName(pharmacyName);
+				listItem.setPharmacyId(pharmacy.getId());
+				listItem.setProductId(detail.getId());
+				listItem.setMaxCount(price.getMaxCount());
 				productList.add(listItem);
 			}
 			return productList;
@@ -217,6 +223,15 @@ public class ProductServiceImpl implements IProductSevice
 			return null;
 		}
 		
+	}
+
+	@Override
+	public boolean checkPriceCount(Integer priceId, Integer count) {
+		Price price=priceRepo.findById(priceId);
+		if (price.getMaxCount()>=count) {
+			return true;
+		}
+		return false;
 	}
 
 }

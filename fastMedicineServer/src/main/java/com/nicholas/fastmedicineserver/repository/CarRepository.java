@@ -12,5 +12,7 @@ public interface CarRepository extends JpaRepository<Car, Integer> {
 	
 	@Query(nativeQuery=true,value="SELECT * FROM t_car WHERE user_id=?1 and is_abandoned=0")
 	List<Car> findCarList(Integer userId);
+	
+	Car findByUserIdAndPriceId(Integer userId,Integer priceId);
 
 }

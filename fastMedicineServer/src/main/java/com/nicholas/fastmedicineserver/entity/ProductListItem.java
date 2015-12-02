@@ -38,7 +38,17 @@ public class ProductListItem
 	
 	private Integer priceId;//对应药店商品id
 	
+	private Integer maxCount;//库存
 	
+	
+
+	public Integer getMaxCount() {
+		return maxCount;
+	}
+
+	public void setMaxCount(Integer maxCount) {
+		this.maxCount = maxCount;
+	}
 
 	public String getPharmacyName() {
 		return pharmacyName;

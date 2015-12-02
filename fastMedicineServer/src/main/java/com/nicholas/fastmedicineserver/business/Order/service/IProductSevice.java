@@ -57,7 +57,7 @@ public interface IProductSevice
 	 * @param count
 	 * @return
 	 */
-	boolean addIntoCar(Integer userId,Integer priceId,Integer count);
+	int addIntoCar(Integer userId,Integer priceId,Integer count);
 	
 	
 	/**
@@ -66,4 +66,13 @@ public interface IProductSevice
 	 * @return
 	 */
 	List<ProductListItem> getCarList(Integer userId);
+	
+	
+	/**
+	 * 比较库存
+	 * @param priceId
+	 * @param count
+	 * @return
+	 */
+	boolean checkPriceCount(Integer priceId,Integer count);
 }

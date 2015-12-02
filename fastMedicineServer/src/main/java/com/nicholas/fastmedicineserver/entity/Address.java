@@ -38,8 +38,19 @@ public class Address
 	@Column(name = "phoneNum", length = 11, nullable = false)
 	private String phoneNum;// 收货人手机号
 
+	@Column(name = "isDefault",  nullable = false)
+	private Integer isDefault;// 用户id
 	
 	
+	
+	public Integer getIsDefault() {
+		return isDefault;
+	}
+
+	public void setIsDefault(Integer isDefault) {
+		this.isDefault = isDefault;
+	}
+
 	public String getMapLongAdd()
 	{
 		return mapLongAdd;

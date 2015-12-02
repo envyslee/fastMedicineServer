@@ -19,8 +19,10 @@ import com.nicholas.fastmedicineserver.business.Order.service.IProductSevice;
 import com.nicholas.fastmedicineserver.business.UserInfo.service.IUserService;
 import com.nicholas.fastmedicineserver.entity.Address;
 import com.nicholas.fastmedicineserver.entity.CarListItem;
+import com.nicholas.fastmedicineserver.entity.Card;
 import com.nicholas.fastmedicineserver.entity.DeviceInfo;
 import com.nicholas.fastmedicineserver.entity.Feedback;
+import com.nicholas.fastmedicineserver.entity.MyCard;
 import com.nicholas.fastmedicineserver.entity.ProductCategory;
 import com.nicholas.fastmedicineserver.entity.ProductDetailItem;
 import com.nicholas.fastmedicineserver.entity.ProductListItem;
@@ -447,12 +449,29 @@ public class MedicineController
 		if (StringUtils.isBlank(userId)||StringUtils.isBlank(priceId)) {
 			return WsResponse.response("001", BaseConstants.paramError);
 		}
-		if (productService.addIntoCar(Integer.parseInt(userId), Integer.parseInt(priceId), Integer.parseInt(count))) {
+		int m=productService.addIntoCar(Integer.parseInt(userId), Integer.parseInt(priceId), Integer.parseInt(count));
+		if (m==0) {
 			return WsResponse.successResponse();
-		}else {
+		}else if (m==1) {
 			return WsResponse.response("009", BaseConstants.noStock);
+		}else if (m==2){
+			return WsResponse.response("012", BaseConstants.carExist);
+		}else {
+			return WsResponse.response("010", BaseConstants.exception);
 		}
-		
+	}
+	
+	@RequestMapping(value="/checkStock",method=RequestMethod.POST)
+	public WsResponse checkStock(HttpServletRequest request,
+			@RequestParam("priceId")String priceId,
+			@RequestParam("count")String count) {
+		if (StringUtils.isBlank(priceId)||StringUtils.isBlank(count)) {
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		if (productService.checkPriceCount(Integer.parseInt(priceId),Integer.parseInt(count))) {
+			return WsResponse.successResponse();
+		}
+		return WsResponse.response("009", BaseConstants.noStock);
 	}
 	
 	/**
@@ -474,4 +493,70 @@ public class MedicineController
 			return WsResponse.successResponse(carList);
 		}
 	}
+	
+	/**
+	 * 更新默认收获地址信息
+	 * @return
+	 */
+	@RequestMapping(value="/updateDefaultAddress",method=RequestMethod.POST)
+	public WsResponse updateDefaultAddress(HttpServletRequest request,
+			@RequestParam("userId") String userId,
+			@RequestParam("addressId") String addressId) {
+		if (StringUtils.isBlank(addressId)||StringUtils.isBlank(userId)) {
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		try {
+			userService.updateDefaultAddress(Integer.parseInt(userId), Integer.parseInt(addressId));
+			return WsResponse.successResponse();
+		} catch (Exception e) {
+			return WsResponse.response("010", BaseConstants.exception);
+		}
+		
+	}
+	
+	/**
+	 * 获取用户积分
+	 * @param request
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value="/getPoint",method=RequestMethod.POST)
+	public WsResponse getPoint(HttpServletRequest request,
+			@RequestParam("userId") String userId) {
+		if (StringUtils.isBlank(userId)) {
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		try {
+			return WsResponse.successResponse(userService.getPoint(Integer.parseInt(userId)));
+		} catch (Exception e) {
+			return WsResponse.response("010", BaseConstants.exception);
+		}
+	}
+	
+	/**
+	 * 获取优惠卡券
+	 * @param request
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value="/getCard",method=RequestMethod.POST)
+	public WsResponse getCard(HttpServletRequest request,
+			@RequestParam("userId") String userId) {
+		if (StringUtils.isBlank(userId)) {
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		try {
+			List<Card> myCards=userService.getCard(Integer.parseInt(userId));
+			if (myCards!=null&&myCards.size()>0) {
+				return WsResponse.successResponse(myCards);
+			}else {
+				return WsResponse.response("013", BaseConstants.noCard);
+			}
+		} catch (Exception e) {
+			return WsResponse.response("010", BaseConstants.exception);
+		}
+	}
+	
+	
+	
 }
