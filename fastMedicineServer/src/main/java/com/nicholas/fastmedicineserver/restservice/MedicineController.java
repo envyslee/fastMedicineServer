@@ -451,7 +451,8 @@ public class MedicineController
 		}
 		int m=productService.addIntoCar(Integer.parseInt(userId), Integer.parseInt(priceId), Integer.parseInt(count));
 		if (m==0) {
-			return WsResponse.successResponse();
+			List<ProductListItem> list=productService.getCarList(Integer.parseInt(userId));
+			return WsResponse.successResponse(list.size());
 		}else if (m==1) {
 			return WsResponse.response("009", BaseConstants.noStock);
 		}else if (m==2){
@@ -461,6 +462,12 @@ public class MedicineController
 		}
 	}
 	
+	/**
+	 * 检查库存
+	 * @param request
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping(value="/checkStock",method=RequestMethod.POST)
 	public WsResponse checkStock(HttpServletRequest request,
 			@RequestParam("priceId")String priceId,
@@ -492,6 +499,31 @@ public class MedicineController
 		}else {
 			return WsResponse.successResponse(carList);
 		}
+	}
+	
+	/**
+	 * 获取购物车中商品数量
+	 * @param request
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value="/getCarCount",method=RequestMethod.POST)
+	public WsResponse getCarCount(HttpServletRequest request,
+			@RequestParam("userId") String userId) {
+		if (StringUtils.isBlank(userId)) {
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		try {
+			List<ProductListItem> carList=productService.getCarList(Integer.parseInt(userId));
+			if (carList==null) {
+				return WsResponse.successResponse(0);
+			}else {
+				return WsResponse.successResponse(carList.size());
+			}
+		} catch (Exception e) {
+			return WsResponse.response("010", BaseConstants.exception);
+		}
+		
 	}
 	
 	/**
