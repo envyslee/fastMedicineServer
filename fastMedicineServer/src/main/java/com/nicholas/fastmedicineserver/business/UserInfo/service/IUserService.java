@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.nicholas.fastmedicineserver.entity.Address;
 import com.nicholas.fastmedicineserver.entity.Card;
+import com.nicholas.fastmedicineserver.entity.ReviewItem;
 
 
 public interface IUserService
@@ -84,4 +85,11 @@ public interface IUserService
 	 * @return
 	 */
 	List<Card> getOtherCard(Integer userId,Integer useStatus);
+	
+	/**
+	 * 获取指定商品的评价列表
+	 * @param priceId
+	 * @return
+	 */
+	List<ReviewItem> getReviewList(Integer priceId);
 }

@@ -14,10 +14,12 @@ import com.nicholas.fastmedicineserver.business.UserInfo.service.IUserService;
 import com.nicholas.fastmedicineserver.entity.Address;
 import com.nicholas.fastmedicineserver.entity.Card;
 import com.nicholas.fastmedicineserver.entity.MyCard;
+import com.nicholas.fastmedicineserver.entity.ReviewItem;
 import com.nicholas.fastmedicineserver.entity.UserInfo;
 import com.nicholas.fastmedicineserver.repository.AddressRepository;
 import com.nicholas.fastmedicineserver.repository.CardRepository;
 import com.nicholas.fastmedicineserver.repository.MyCardRepository;
+import com.nicholas.fastmedicineserver.repository.ReviewRepository;
 import com.nicholas.fastmedicineserver.repository.UserRepository;
 
 @Component
@@ -34,6 +36,9 @@ public class UserServiceImpl implements IUserService
 	
 	@Autowired
 	CardRepository cardRepo;
+	
+	@Autowired
+	ReviewRepository reviewRepo;
 	
 	@Override
 	public boolean isUserExistByPhone(String num)
@@ -153,5 +158,14 @@ public class UserServiceImpl implements IUserService
 	}
 
 	
-	
+	@Override
+	public List<ReviewItem> getReviewList(Integer priceId) {
+		List<ReviewItem> reviews=reviewRepo.findByPriceIdAndVerifyId(priceId, 1);
+		for (ReviewItem review : reviews) {
+			Integer userId=review.getUserId();
+			UserInfo userInfo=userRepo.findById(userId);
+			review.setUserName(userInfo.getPhoneNum());
+		}
+		return reviews;
+	}
 }

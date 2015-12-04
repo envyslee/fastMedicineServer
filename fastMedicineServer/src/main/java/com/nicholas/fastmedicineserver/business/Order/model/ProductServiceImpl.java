@@ -18,10 +18,12 @@ import com.nicholas.fastmedicineserver.entity.Price;
 import com.nicholas.fastmedicineserver.entity.ProductDetail;
 import com.nicholas.fastmedicineserver.entity.ProductDetailItem;
 import com.nicholas.fastmedicineserver.entity.ProductListItem;
+import com.nicholas.fastmedicineserver.entity.ReviewItem;
 import com.nicholas.fastmedicineserver.repository.CarRepository;
 import com.nicholas.fastmedicineserver.repository.PharmacyRepository;
 import com.nicholas.fastmedicineserver.repository.PriceRepository;
 import com.nicholas.fastmedicineserver.repository.ProductDetailRepository;
+import com.nicholas.fastmedicineserver.repository.ReviewRepository;
 
 @Component
 public class ProductServiceImpl implements IProductSevice
@@ -37,8 +39,7 @@ public class ProductServiceImpl implements IProductSevice
 	
 	@Autowired
 	CarRepository carRepo;
-	
-	
+
 	
 	@Override
 	public List<ProductListItem> getProductDetails(int p,int c,int i)
@@ -233,5 +234,7 @@ public class ProductServiceImpl implements IProductSevice
 		}
 		return false;
 	}
+
+
 
 }

@@ -7,6 +7,7 @@ import com.nicholas.fastmedicineserver.entity.Price;
 import com.nicholas.fastmedicineserver.entity.ProductDetail;
 import com.nicholas.fastmedicineserver.entity.ProductDetailItem;
 import com.nicholas.fastmedicineserver.entity.ProductListItem;
+import com.nicholas.fastmedicineserver.entity.ReviewItem;
 
 public interface IProductSevice
 {
@@ -75,4 +76,7 @@ public interface IProductSevice
 	 * @return
 	 */
 	boolean checkPriceCount(Integer priceId,Integer count);
+	
+	
+
 }

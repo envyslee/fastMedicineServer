@@ -27,4 +27,6 @@ public class BaseConstants
 	public static String carExist="商品已经在购物车里了哦";//012
 	
 	public static String noCard="您没有可使用的优惠券";//013
+	
+	public static String noReview="该商品没有评论";//014
 }

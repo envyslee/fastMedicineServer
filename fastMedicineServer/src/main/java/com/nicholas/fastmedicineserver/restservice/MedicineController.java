@@ -26,6 +26,7 @@ import com.nicholas.fastmedicineserver.entity.MyCard;
 import com.nicholas.fastmedicineserver.entity.ProductCategory;
 import com.nicholas.fastmedicineserver.entity.ProductDetailItem;
 import com.nicholas.fastmedicineserver.entity.ProductListItem;
+import com.nicholas.fastmedicineserver.entity.ReviewItem;
 import com.nicholas.fastmedicineserver.entity.SearchKey;
 import com.nicholas.fastmedicineserver.integration.BaseConstants;
 import com.nicholas.fastmedicineserver.integration.WsResponse;
@@ -615,4 +616,31 @@ public class MedicineController
 		}
 	}
 	
+	/**
+	 * 获取评论列表
+	 * @param request
+	 * @param priceId
+	 * @return
+	 */
+	@RequestMapping(value="/getReview",method=RequestMethod.POST)
+	public WsResponse getReview(HttpServletRequest request,
+			@RequestParam("priceId") String priceId) {
+		if (StringUtils.isBlank(priceId)) {
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		try {
+			List<ReviewItem> reviews=userService.getReviewList(Integer.parseInt(priceId));
+			if (reviews!=null&&reviews.size()>0) {
+				return WsResponse.successResponse(reviews);
+			}else {
+				return WsResponse.response("014", BaseConstants.noReview);
+			}
+			
+		} catch (Exception e) {
+			return WsResponse.response("010", BaseConstants.exception);
+		}
+	}
+	
 }
+
+
