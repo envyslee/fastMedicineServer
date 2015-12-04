@@ -141,6 +141,17 @@ public class UserServiceImpl implements IUserService
 		return list;
 	}
 
+	@Override
+	public List<Card> getOtherCard(Integer userId, Integer useStatus) {
+		List<Card> list=new ArrayList<Card>();
+		List<MyCard> myCards=myCardRepo.findByUserIdAndUseStatus(userId,useStatus);
+		for (MyCard myCard : myCards) {
+			Card card=cardRepo.findById(myCard.getCardId());
+			list.add(card);
+		}
+		return list;
+	}
+
 	
 	
 }

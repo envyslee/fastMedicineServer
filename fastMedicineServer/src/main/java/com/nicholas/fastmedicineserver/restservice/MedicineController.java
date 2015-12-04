@@ -566,7 +566,7 @@ public class MedicineController
 	}
 	
 	/**
-	 * 获取优惠卡券
+	 * 获取可用优惠卡券
 	 * @param request
 	 * @param userId
 	 * @return
@@ -589,6 +589,30 @@ public class MedicineController
 		}
 	}
 	
-	
+	/**
+	 * 获取其他卡券
+	 * @param request
+	 * @param userId
+	 * @param useStatus 1已用 2过期
+	 * @return
+	 */
+	@RequestMapping(value="/getOtherCard",method=RequestMethod.POST)
+	public WsResponse getOtherCard(HttpServletRequest request,
+			@RequestParam("userId") String userId,
+			@RequestParam("useStatus") String useStatus) {
+		if (StringUtils.isBlank(userId)||StringUtils.isBlank(useStatus)) {
+			return WsResponse.response("001", BaseConstants.paramError);
+		}
+		try {
+			List<Card> myCards=userService.getOtherCard(Integer.parseInt(userId), Integer.parseInt(useStatus));
+			if (myCards!=null&&myCards.size()>0) {
+				return WsResponse.successResponse(myCards);
+			}else {
+				return WsResponse.response("013", BaseConstants.noCard);
+			}
+		} catch (Exception e) {
+			return WsResponse.response("010", BaseConstants.exception);
+		}
+	}
 	
 }

@@ -70,9 +70,18 @@ public interface IUserService
 	int getPoint(Integer userId);
 	
 	/**
-	 * 获取优惠卡券
+	 * 获取可用优惠卡券
 	 * @param userId
 	 * @return
 	 */
 	List<Card> getCard(Integer userId);
+	
+	
+	/**
+	 * 获取其他卡券
+	 * @param userId
+	 * @param useStatus
+	 * @return
+	 */
+	List<Card> getOtherCard(Integer userId,Integer useStatus);
 }
